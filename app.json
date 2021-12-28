@@ -4,9 +4,9 @@
     "slug": "aidn_Doctor",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/aidn.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/aidnSplash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -21,12 +21,18 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/aidn.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+       "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyBRwDvmBt_Z4ZFVTYytgLsWW9yUSEJngk0"
+        }
+      },
+      "package": "com.aidn.aidnDoctor"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/aidn.png"
     }
   }
 }
