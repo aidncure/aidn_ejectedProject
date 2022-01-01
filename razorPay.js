@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import ConsultaionScreen from "./screens/Home/ConsultationDetailScreen";
 import axios from "axios";
+import {firebase, auth, db, firestore} from '../../firebase';
 
 
 export default function PaymentMethodRay () {
 
     const [orderId, setOrderId] = useState();
-
     useEffect(() => {
     // This will generate the Order Id
     axios({
@@ -26,23 +26,11 @@ export default function PaymentMethodRay () {
       .then(res => {
         console.warn(res);
         setOrderId({
-          orderId: res.data.id // Extracting the OrderId from razorpay response data
+          orderId: res.data.id, // Extracting the OrderId from razorpay response data
         });
       })
       .catch(err => {
         console.log("Theres an error with the code", err);
       }); 
-    }, [])
-
-    // return (
-    //   <RazorPay
-    //     amount={100}
-    //     name="MrRoom" // The Company name will appear on the payment page
-    //     contact_name="Ali" // Payer name
-    //     email="irizviali@gmail.com" // Payer email id
-    //     contact="XXXXXXXXXXX" // Payer mobile Number
-    //     orderId={this.state.orderId}
-    //   />
-    // );
-  
+    }, [])  
 }

@@ -54,35 +54,35 @@ const cancelledDataList = [
     },
 ];
 
-const PastAppointmentScreen = () => {
-    const renderItem = ({ item }) => (
-        <View style={{ marginHorizontal: 20.0 }}>
-            <View style={{ flexDirection: 'row', marginVertical: 20.0 }}>
-                <View style={styles.pasetCircleStyle}>
-                    <Text style={{ textAlign: 'center', color: Colors.primary, fontSize: 18, }}>{item.date}</Text>
-                </View>
-                <View style={{ marginLeft: 10.0 }}>
-                    <Text style={{ ...Fonts.black18Bold }}>{item.time}</Text>
-                    <Text style={{ marginVertical: 8.0, ...Fonts.black16Regular }}>{item.doctor}</Text>
-                    <Text style={{ ...Fonts.primaryColorRegular }}>{item.type}</Text>
-                </View>
-            </View>
-            <View style={{ backgroundColor: Colors.lightGray, height: 0.50, }}>
-            </View>
-        </View>
-    )
+// const PastAppointmentScreen = () => {
+//     const renderItem = ({ item }) => (
+//         <View style={{ marginHorizontal: 20.0 }}>
+//             <View style={{ flexDirection: 'row', marginVertical: 20.0 }}>
+//                 <View style={styles.pasetCircleStyle}>
+//                     <Text style={{ textAlign: 'center', color: Colors.primary, fontSize: 18, }}>{item.date}</Text>
+//                 </View>
+//                 <View style={{ marginLeft: 10.0 }}>
+//                     <Text style={{ ...Fonts.black18Bold }}>{item.time}</Text>
+//                     <Text style={{ marginVertical: 8.0, ...Fonts.black16Regular }}>{item.doctor}</Text>
+//                     <Text style={{ ...Fonts.primaryColorRegular }}>{item.type}</Text>
+//                 </View>
+//             </View>
+//             <View style={{ backgroundColor: Colors.lightGray, height: 0.50, }}>
+//             </View>
+//         </View>
+//     )
 
-    return (
-        <View style={{ flex: 1, backgroundColor: 'white' }}>
-            <FlatList
-                data={pastDataList}
-                keyExtractor={(item) => `${item.id}`}
-                renderItem={renderItem}
-            />
-        </View>
-    )
+//     return (
+//         <View style={{ flex: 1, backgroundColor: 'white' }}>
+//             <FlatList
+//                 data={pastDataList}
+//                 keyExtractor={(item) => `${item.id}`}
+//                 renderItem={renderItem}
+//             />
+//         </View>
+//     )
 
-}
+// }
 
 const CancelledAppointmentScreen = () => {
     const renderItem = ({ item }) => (
@@ -146,7 +146,7 @@ export default TabBarScreen = () => {
 
     const [routes] = React.useState([
         { key: 'first', title: 'Active', },
-        { key: 'second', title: 'Past' },
+        // { key: 'second', title: 'Past' },
         { key: 'third', title: 'Cancelled', },
     ]);
 
@@ -158,9 +158,10 @@ export default TabBarScreen = () => {
         switch (route.key) {
             case 'first':
                 return <ActiveAppointmentScreen jumpTo={jumpTo} />;
-            case 'second':
-                return <PastAppointmentScreen jumpTo={jumpTo} />;
+            // case 'second':
+            //     return <PastAppointmentScreen jumpTo={jumpTo} />;
             case 'third':
+            // case 'second':
                 return <CancelledAppointmentScreen jumpTo={jumpTo} />;
         }
     };

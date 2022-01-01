@@ -83,6 +83,7 @@ const TimeSlotScreen = ({ navigation }) => {
       timeSelected : selectedSlot + '  /  ' + 'Users choice of time',
       Doctor_name:name,
       User_Booking_Date : new Date().toDateString(),
+      UserAppointmentBookingId: userData + '/'+ 'AIND' + '/' + Math.random().toString(36).slice(2),
       // id:key      
     })
     // .then(()=>setSelectedSlot(`${item} ${time}`))

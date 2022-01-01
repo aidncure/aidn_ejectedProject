@@ -21,15 +21,16 @@ import stripe from 'tipsi-stripe';
 import CardFormScreen from '../../scenes/CardFormScreen';
 import RazorpayCheckout from 'react-native-razorpay';
 import axios from "axios";
+// import CustomCardScreen from "../../scenes/CustomBankScreen"
+// import crypto from "crypto"
 
 // stripe.setOptions({
 //   publishableKey:'pk_test_51K84PtSGPMJ99FNgX57aaoX5J5UACm4MVzTxzs46ldk9LP9sbnEX6prObXtDcPf9baInJKUMj5uYBEUwERbwo82b00oolvcUS9',
 // });
 
-// stripe.setOptions({
-//   publishableKey: 'pk_test_51K84PtSGPMJ99FNgX57aaoX5J5UACm4MVzTxzs46ldk9LP9sbnEX6prObXtDcPf9baInJKUMj5uYBEUwERbwo82b00oolvcUS9',
-//   androidPayMode: 'test',
-// })
+stripe.setOptions({
+  publishableKey: 'pk_test_51K84PtSGPMJ99FNgX57aaoX5J5UACm4MVzTxzs46ldk9LP9sbnEX6prObXtDcPf9baInJKUMj5uYBEUwERbwo82b00oolvcUS9',
+})
 
 
 const { width } = Dimensions.get("screen");
@@ -44,24 +45,22 @@ const ConsultaionScreen = ({ navigation }) => {
   // const bookingDates = navigation.getParam("datesBlacklist")
 
   //  const userData = firebase.auth().currentUser; 
-
+//https://www.npmjs.com/package/razorpay
 
   const db = firebase.firestore()
 
   const [users, setUsers] = useState([]);
     useEffect(() => {
       const userData = firebase.auth().currentUser;
-      db.collection('users'+ userData.uid).onSnapshot((querySnapshot)=>{
+      db.collection('users' + userData.uid).onSnapshot((querySnapshot)=>{
         const users = [];
         querySnapshot.docs.forEach((doc)=>{
-          const {name,age,from,gender,occupation} = doc.data();
+          const {name,email,phone} = doc.data();
           users.push({
-            id:doc.id,
+            id:userData.uid,
             name,
-            from,
-            gender,
-            occupation,
-            age,
+            email: userData.email,
+            phone,
           });
         });
         setUsers(users);
@@ -71,6 +70,7 @@ const ConsultaionScreen = ({ navigation }) => {
 
    const [check, setCheck] = useState(false);
    const [cash, setCash] = useState(false);
+  //  const [selectedSlot, setSelectedSlot] = React.useState("");
 
 
    const [orderId, setOrderId] = useState();
@@ -100,17 +100,29 @@ const ConsultaionScreen = ({ navigation }) => {
       .catch(err => {
         console.log("Theres an error with the code", err);
       }); 
-    }, [])
 
-   
+      // const response = axios.post("https://api.razorpay.com/v1/orders",{
+      //   const {orderId}
+      // })
+      // axios.post("https://api.razorpay.com/v1/orders",{
+      //   const {orderId, successId} = re
+      // })
+
+    }, [])   
   const userData = firebase.auth().currentUser;
   const saveUserDetails = async () => {
-      await db.collection('users').doc('Appointments Booked' + userData.uid).set({
-      uid:userData.uid,
-      key:Math.random(),
-      date: new Date().toUTCString(),
+      await db.collection('users').doc('Appointments Booked' + userData.uid).update({
+      // uid:userData.uid,
+      // key:Math.random(),
+      // date: new Date().toUTCString(),
+      // Doctor_name:name,
       User_Booking_Date : new Date().toDateString(),
-      patient_id : userData.uid  +  ' / TIME / ' + new Date().toUTCString(),
+      // order_id : orderId,
+      // razorPay_paymentId:successId, 
+      // timeSelected : slot,
+      // createdAt: firestore.FieldValue.serverTimestamp()
+
+      // patient_name : users.name,
       // patient_latitude : location 
     })   
   } 
@@ -136,19 +148,31 @@ const ConsultaionScreen = ({ navigation }) => {
     currency: 'INR',
     key: 'rzp_test_6RtX3AoqaOQTpA', // Your api key
     amount: '5000',
-    name: 'Rahul Abhishek S',
-    // name: users.name,
+    // name: 'Rahul Abhishek S',
+    // name: userData.email,
     order_id: orderId , //Replace this with an order_id created using Orders API. Learn more at https://razorpay.com/docs/api/orders.
     prefill: {
-      email: 'void@razorpay.com',
+      email: users.email,
       contact: '9191919191',
-      name: users.name,
+      name: 'Rahul Abhishek S',
     },
-    theme: {color: Colors.primary}
+    theme: {color: Colors.primary},
+    // send_sms_hash: {true}
   }
+  const key_secret = "SqAik4NHHQcY61GF0VRfcIkI";
   RazorpayCheckout.open(options).then((data) => {
     // handle success
-    alert(`Success: ${data.razorpay_payment_id}`);
+    const successId = (`Success: ${data.razorpay_payment_id}`);
+
+    const userData = firebase.auth().currentUser;
+      db.collection('users').doc('Appointments Booked' + userData.uid).update({
+      User_Booking_Date : new Date().toDateString(),
+      order_id : orderId,
+      payment_id: successId,
+    })
+    console.log(`Success: ${data.razorpay_payment_id}`);
+    console.warn(`Success: ${data.razorpay_payment_id}`);
+    // alert(`Success: ${data.razorpay_signature}`);
   }).catch((error) => {
     // handle failure
     alert(`Error: ${error.code} | ${error.description}`);
@@ -357,7 +381,7 @@ const ConsultaionScreen = ({ navigation }) => {
     return (
       <TouchableOpacity
         style={styles.confirmAndPayButtonStyle}
-        // onPress={() => navigation.navigate("PaymentMethod")}
+        onPress={saveUserDetails}
       >
       <TouchableWithoutFeedback
         onPress={paymentHandler}
@@ -381,7 +405,8 @@ const ConsultaionScreen = ({ navigation }) => {
   //       {/* <View style={styles.confirmButtonStyle}>
   //         <Text style={{ ...Fonts.white20Regular, color:'#000' }}>Confirm & Pay</Text>
   //       </View> */}
-  //       {/* <CardFormScreen/> */}
+  //       <CardFormScreen/>
+  //       {/* <CustomCardScreen/> */}
   //     </TouchableWithoutFeedback>
   //     </TouchableOpacity>
   //   );

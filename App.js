@@ -28,6 +28,11 @@ import HomeScreen from "./screens/Home/HomeScreen";
 import ShowMoreScreen from "./screens/Home/ShowMoreScreen"
 import UsersProfileScreen from './screens/Profile/userProfileScreen'
 import { database } from "./firebase";
+import stripe from 'tipsi-stripe';
+
+stripe.setOptions({
+  publishableKey: 'pk_test_51K84PtSGPMJ99FNgX57aaoX5J5UACm4MVzTxzs46ldk9LP9sbnEX6prObXtDcPf9baInJKUMj5uYBEUwERbwo82b00oolvcUS9',
+})
 
 const navigator = createAppContainer(
   createSwitchNavigator(
