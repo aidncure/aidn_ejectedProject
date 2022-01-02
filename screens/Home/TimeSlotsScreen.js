@@ -55,6 +55,7 @@ const TimeSlotScreen = ({ navigation }) => {
   const experience = navigation.getParam("experience");
   const type = navigation.getParam("type");
   const rating = navigation.getParam("rating");
+  const UserAppointmentBookingId = navigation.getParam("UserAppointmentBookingId");
   const datesBlacklistFunction = navigation.getParam("datesBlacklist")
 
   const [selectedSlot, setSelectedSlot] = React.useState("");
@@ -140,6 +141,7 @@ const TimeSlotScreen = ({ navigation }) => {
                   rating,
                   experience,
                   datesBlacklistFunction,
+                  UserAppointmentBookingId,
                 })
               }
             >

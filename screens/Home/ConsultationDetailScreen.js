@@ -21,7 +21,8 @@ import stripe from 'tipsi-stripe';
 import CardFormScreen from '../../scenes/CardFormScreen';
 import RazorpayCheckout from 'react-native-razorpay';
 import axios from "axios";
-// import CustomCardScreen from "../../scenes/CustomBankScreen"
+import StripePay from "../../stripePay";
+import { StripeProvider } from "@stripe/stripe-react-native";
 // import crypto from "crypto"
 
 // stripe.setOptions({
@@ -377,40 +378,42 @@ const ConsultaionScreen = ({ navigation }) => {
     );
   }
 
-  function confirmPayButton() {
-    return (
-      <TouchableOpacity
-        style={styles.confirmAndPayButtonStyle}
-        onPress={saveUserDetails}
-      >
-      <TouchableWithoutFeedback
-        onPress={paymentHandler}
-      >
-        <View style={styles.confirmButtonStyle}>
-          <Text style={{ ...Fonts.white20Regular, color:'#000' }}>Confirm & Pay</Text>
-        </View>
-      </TouchableWithoutFeedback>
-      </TouchableOpacity>
-    );
-  }
   // function confirmPayButton() {
   //   return (
   //     <TouchableOpacity
   //       style={styles.confirmAndPayButtonStyle}
-  //       onPress={() => navigation.navigate("PaymentMethod")}
-  //     >
-  //     <TouchableWithoutFeedback
   //       onPress={saveUserDetails}
   //     >
-  //       {/* <View style={styles.confirmButtonStyle}>
+  //     <TouchableWithoutFeedback
+  //       onPress={paymentHandler}
+  //     >
+  //       <View style={styles.confirmButtonStyle}>
   //         <Text style={{ ...Fonts.white20Regular, color:'#000' }}>Confirm & Pay</Text>
-  //       </View> */}
-  //       <CardFormScreen/>
-  //       {/* <CustomCardScreen/> */}
+  //       </View>
   //     </TouchableWithoutFeedback>
   //     </TouchableOpacity>
   //   );
   // }
+  function confirmPayButton() {
+    return (
+      <TouchableOpacity
+        style={styles.confirmAndPayButtonStyle}
+        onPress={() => navigation.navigate("PaymentMethod")}
+      >
+      <TouchableWithoutFeedback
+        onPress={saveUserDetails}
+      >
+        {/* <View style={styles.confirmButtonStyle}>
+          <Text style={{ ...Fonts.white20Regular, color:'#000' }}>Confirm & Pay</Text>
+        </View> */}
+        {/* <CardFormScreen/> */}
+        <StripeProvider publishableKey="pk_test_51K84PtSGPMJ99FNgX57aaoX5J5UACm4MVzTxzs46ldk9LP9sbnEX6prObXtDcPf9baInJKUMj5uYBEUwERbwo82b00oolvcUS9">
+          <StripePay/>
+        </StripeProvider>
+      </TouchableWithoutFeedback>
+      </TouchableOpacity>
+    );
+  }
 
 // export default class CardFormScreen extends PureComponent {
 //   static title = 'Card Form'

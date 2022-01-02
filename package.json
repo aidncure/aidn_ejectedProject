@@ -18,7 +18,7 @@
     "@react-navigation/bottom-tabs": "^5.11.11",
     "@react-navigation/native": "^5.9.8",
     "@react-navigation/stack": "^5.14.5",
-    "@stripe/stripe-react-native": "0.2.3",
+    "@stripe/stripe-react-native": "^0.2.3",
     "@use-expo/font": "^2.0.0",
     "axios": "^0.24.0",
     "crypto": "^1.0.1",
@@ -74,6 +74,7 @@
     "react-navigation-tabs": "^2.11.1",
     "react-swipe-to-delete-component": "^0.5.5",
     "reanimated-bottom-sheet": "^1.0.0-alpha.22",
+    "stripe": "^8.195.0",
     "tipsi-stripe": "^9.2.0"
   },
   "devDependencies": {

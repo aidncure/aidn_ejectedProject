@@ -14,6 +14,8 @@ import AwesomeAlert from "react-native-awesome-alerts";
 import { Ionicons } from "@expo/vector-icons";
 import { CheckBox, Icon } from 'react-native-elements';
 import { Avatar } from "react-native-elements/dist/avatar/Avatar";
+import StripePay from "../../stripePay";
+import { StripeProvider } from "@stripe/stripe-react-native";
 
 const { width } = Dimensions.get("screen");
 
@@ -109,6 +111,9 @@ const PaymentMethodScreen = ({ navigation }) => {
           >Debit or Credit card</Text>
         </View>
         </TouchableOpacity>
+         <StripeProvider publishableKey="pk_test_51K84PtSGPMJ99FNgX57aaoX5J5UACm4MVzTxzs46ldk9LP9sbnEX6prObXtDcPf9baInJKUMj5uYBEUwERbwo82b00oolvcUS9">
+          <StripePay/>
+        </StripeProvider>
       </View>
     );
   }
@@ -262,7 +267,7 @@ const PaymentMethodScreen = ({ navigation }) => {
       <View>
       {/* {paymentModeCash()} */}
       </View>
-      {payButton()}
+      {/* {payButton()} */}
       {successModal()}
     </View>
   );
