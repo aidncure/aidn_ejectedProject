@@ -71,8 +71,8 @@ const HomeScreen = ({ navigation }) => {
 
   const specialistsList = [
     {
-      id: "1",
-      name: "Cough & Fever",
+     id: "1",
+      name: "Fever",
       image: require("../../assets/imagesvtr/icons8-coughing-100.png"),
     },
     {
@@ -88,22 +88,27 @@ const HomeScreen = ({ navigation }) => {
     {
       id: "4",
       name: "Pediatrician",
-      image: require("../../assets/imagesvtr/icons8-color-96.png"),
+      image: require("../../assets/imagesvtr/icons8-pacifier-100.png"),
     },
     {
       id: "5",
-      name: "Physiotherapist",
-      image: require("../../assets//imagesvtr/icons8-physical-therapy-96.png"),
+      name: "Physiotherapy",
+      image: require("../../assets//imagesvtr/icons8-medical-doctor-100.png"),
     },
     {
       id: "6",
       name: "Nutritionist",
-      image: require("../../assets/imagesvtr/icons8-diet-64.png"),
+      image: require("../../assets/imagesvtr/icons8-dumbbell-100.png"),
     },
     {
       id: "7",
       name: "Psychiatrist",
       image: require("../../assets/imagesvtr/icons8-brain-100.png"),
+    },
+    {
+      id: "8",
+      name: "Lungs",
+      image: require("../../assets/imagesvtr/icons8-lungs-100.png"),
     },
   ];
 

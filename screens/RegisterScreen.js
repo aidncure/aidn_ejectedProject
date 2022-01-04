@@ -8,6 +8,7 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
+  Alert,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Fonts, Colors, Sizes } from "../constant/styles";
@@ -100,6 +101,11 @@ const RegisterScreen = ({ navigation }) => {
 // const RegisterScreen = () => {
 const [Email , setEmail] = useState('')
 const [Password , setPassword] = useState('')
+const [name , setName] = useState('')
+const [gender , setGender]= useState('')
+const [dob , setDob] = useState('')
+const [phoneNumber , setPhoneNumber] = useState('')
+const [phoneCode , setPhoneCode] = useState('+91')
 
 const handleRegister = () => {
   auth
@@ -112,6 +118,39 @@ const handleRegister = () => {
   .catch(error => alert(error.message))
 }
 // }
+
+
+
+const handleRegistration = async() =>{
+  await fetch('https://aidn.in/api/register',{
+    method:'POST',
+    headers:{
+      'Accept':'application/json',
+      'Content-Type':'application/json'
+    },
+    body:JSON.stringify({
+    "name": name,
+    "email": Email,
+    "dob": dob,
+    "gender": gender,
+    "phone": phoneNumber,
+    "phone_code": phoneCode,
+    "password":Password,
+  })
+  }).then(res => res.json())
+  .then(resData => {
+    
+    if(resData.msg === 'successfully register'){
+      // navigation.navigate('Home')
+      navigation.replace('BottomTabScreen')
+      // {handleHome}
+    }else{
+      Alert.alert(JSON.stringify(resData));
+      console.log(JSON.stringify(resData));
+      // Alert.alert('Invalid email or password', resData);
+    }
+  });
+}
 
   function userName() {
     return (
@@ -127,8 +166,8 @@ const handleRegister = () => {
         }}
       >
         <TextInput
-        value = {username}
-          onChangeText={text => setUsername(text)}
+          value = {name}
+          onChangeText={value => setName(value)}
           placeholder="Username"
           style={{ ...Fonts.white16Regular }}
           placeholderTextColor="#fff"
@@ -159,6 +198,84 @@ const handleRegister = () => {
           style={{ ...Fonts.white16Regular }}
           placeholderTextColor="white"
           secureTextEntry={true}
+        />
+      </View>
+    );
+  }
+  function genderInfo() {
+ 
+    return (
+      <View
+        style={{
+          // backgroundColor: "rgba(255,255,255,0.25)",
+          borderBottomColor:"#eee",
+          borderBottomWidth:1,
+          // borderRadius: Sizes.fixPadding + 15.0,
+          marginTop: Sizes.fixPadding * 4.0,
+          // paddingVertical: Sizes.fixPadding + 3.0,
+          // paddingHorizontal: Sizes.fixPadding + 15.0,
+
+        }}
+      >
+        <TextInput
+          value={gender}
+          onChangeText={value => setGender(value)}
+          placeholder="Gender"
+          style={{ ...Fonts.white16Regular }}
+          placeholderTextColor="white"
+          // secureTextEntry={true}
+        />
+      </View>
+    );
+  }
+  function dateofBirth() {
+ 
+    return (
+      <View
+        style={{
+          // backgroundColor: "rgba(255,255,255,0.25)",
+          borderBottomColor:"#eee",
+          borderBottomWidth:1,
+          // borderRadius: Sizes.fixPadding + 15.0,
+          marginTop: Sizes.fixPadding * 4.0,
+          // paddingVertical: Sizes.fixPadding + 3.0,
+          // paddingHorizontal: Sizes.fixPadding + 15.0,
+
+        }}
+      >
+        <TextInput
+          value={dob}
+          onChangeText={value => setDob(value)}
+          placeholder="Date of birth"
+          style={{ ...Fonts.white16Regular }}
+          placeholderTextColor="white"
+          // secureTextEntry={true}
+        />
+      </View>
+    );
+  }
+  function phone() {
+ 
+    return (
+      <View
+        style={{
+          // backgroundColor: "rgba(255,255,255,0.25)",
+          borderBottomColor:"#eee",
+          borderBottomWidth:1,
+          // borderRadius: Sizes.fixPadding + 15.0,
+          marginTop: Sizes.fixPadding * 4.0,
+          // paddingVertical: Sizes.fixPadding + 3.0,
+          // paddingHorizontal: Sizes.fixPadding + 15.0,
+
+        }}
+      >
+        <TextInput
+          value={phoneNumber}
+          onChangeText={value => setPhoneNumber(value)}
+          placeholder="Phone number"
+          style={{ ...Fonts.white16Regular }}
+          placeholderTextColor="white"
+          // secureTextEntry={true}
         />
       </View>
     );
@@ -198,7 +315,8 @@ const handleRegister = () => {
       <TouchableOpacity
         activeOpacity={0.9}
         // onPress={()=>{SignUp}}
-        onPress={handleRegister} //BottomTabScreen
+        // onPress={handleRegister} //BottomTabScreen
+        onPress={handleRegistration} //BottomTabScreen
       >
         <View
           style={{
@@ -255,12 +373,12 @@ const handleRegister = () => {
       <ImageBackground
 
         style={styles.imageContainer}
-        // source={require("../assets/imagesvtr/clip-1072.png")}
+        source={require('../assets/imagesvtr/mirage-astronaut.png')}
       >
         <LinearGradient
           start={{ x: 0, y: 1 }}
           end={{ x: 0, y: 0 }}
-          colors={[Colors.dodgerBlue,"rgba(0,0,0,0.0)", "rgba(0,0,0,0.0)"]}
+          colors={[Colors.dodgerBlue,"rgba(0,0,0,0.3)", "rgba(0,0,0,0.4)"]}
           style={{ flex: 1, paddingHorizontal: Sizes.fixPadding * 2.0 }}
         >
           <ScrollView style={{ paddingBottom: Sizes.fixPadding * 2.0 }}>
@@ -284,10 +402,12 @@ const handleRegister = () => {
             >
               Create account
             </Text>
-            {/* {userName()} */}
+            {userName()}
             {email()}
+            {genderInfo()}
+            {dateofBirth()}
+            {phone()}
             {password()}
-            {/* {confirmPassword()} */}
             {continueButton()}
           </ScrollView>
         </LinearGradient>
@@ -306,7 +426,8 @@ RegisterScreen.navigationOptions = () => {
 const styles=({
   imageContainer:{
      flex: 1,
-     backgroundColor:Colors.dodgerBlue
+     backgroundColor:Colors.dodgerBlue,
+    //  width:"90%"
   }
 });
 

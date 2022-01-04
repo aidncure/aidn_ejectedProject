@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TextInput, Button, Alert } from "react-native";
 import { CardField, useConfirmPayment } from "@stripe/stripe-react-native";
 
 //ADD localhost address of your server
-const API_URL =  "http://192.168.1.4:3000";
+const API_URL = "http://192.168.1.4:3000";
 
 const StripeApp = props => {
   const [email, setEmail] = useState();
@@ -11,7 +11,7 @@ const StripeApp = props => {
   const { confirmPayment, loading } = useConfirmPayment();
 
   const fetchPaymentIntentClientSecret = async () => {
-    const response = await fetch(`${API_URL}/pay`, {
+    const response = await fetch(`${API_URL}/create-payment-intent`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

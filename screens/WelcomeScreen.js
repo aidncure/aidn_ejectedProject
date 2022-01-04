@@ -59,27 +59,27 @@ const WelcomeScreen = ({ navigation }) => {
   .catch(error => alert(error.message))
 }
 
-  // React.useEffect(() => {
-  //   fetch("https://restcountries.eu/rest/v2/all")
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       let areaData = data.map((item) => {
-  //         return {
-  //           code: item.alpha2Code,
-  //           name: item.name,
-  //           callingCode: `+${item.callingCodes[0]}`,
-  //           flag: `https://www.countryflags.io/${item.alpha2Code}/flat/64.png`,
-  //         };
-  //       });
-  //       setAreas(areaData);
-  //       if (areaData.length > 0) {
-  //         let defaultData = areaData.filter((a) => a.code == "US");
-  //         if (defaultData.length > 0) {
-  //           setSelectedArea(defaultData[0]);
-  //         }
-  //       }
-  //     });
-  // }, []);
+const handleLogin = async() =>{
+  await fetch('https://aidn.in/api/login',{
+    method:'POST',
+    headers:{
+      'Accept':'application/json',
+      'Content-Type':'application/json'
+    },
+    body:JSON.stringify({"email":Email, "password":Password})
+  }).then(res => res.json())
+  .then(resData => {
+    
+    if(resData.msg === 'successfully login'){
+      navigation.navigate('BottomTabScreen')
+      console.log(resData)
+      {handleHome}
+    }else{
+      // Alert.alert(JSON.stringify(resData));
+      Alert.alert('Invalid email or password');
+    }
+  });
+}
 
   function renderAreaCodesModal() {
     const renderItem = ({ item }) => {
@@ -150,7 +150,8 @@ const WelcomeScreen = ({ navigation }) => {
         <View style={styles.emailContainerStyle}>
           <TextInput
            value={Email}
-           onChangeText={text => setEmail(text)}
+          //  onChangeText={text => setEmail(text)}
+           onChangeText={value => setEmail(value)}
             placeholder="Email"
             placeholderTextColor="dodgerblue"
             keyboardType='email-address'
@@ -168,7 +169,8 @@ const WelcomeScreen = ({ navigation }) => {
         <View style={styles.emailContainerStyle}>
           <TextInput
            value={Password}
-            onChangeText={text => setPassword(text)}
+            // onChangeText={text => setPassword(text)}
+            onChangeText={value => setPassword(value)}
             placeholder="Password"
             placeholderTextColor="dodgerblue"
             // keyboardType= 'default'
@@ -187,7 +189,8 @@ const WelcomeScreen = ({ navigation }) => {
       <TouchableOpacity
         // style={styles.buttonContainer}
         activeOpacity={0.9}
-        onPress={handleRegister}
+        // onPress={handleRegister}
+        onPress={handleLogin}
       >
       <View>
         <View onPress={handleHome}  style={styles.buttonContainer}>
