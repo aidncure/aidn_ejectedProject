@@ -732,7 +732,7 @@ const HomeScreen = ({ navigation }) => {
     <View>
     <ScrollView>
       {header()}
-      {search()}
+      {/* {search()} */}
       {newlyLanched()}
       {title({ title: "Find doctor by speciality" })}
       {specialists()}

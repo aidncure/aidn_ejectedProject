@@ -84,20 +84,20 @@ const TimeSlotScreen = ({ navigation }) => {
       timeSelected : selectedSlot + '  /  ' + 'Users choice of time',
       Doctor_name:name,
       User_Booking_Date : new Date().toDateString(),
-      UserAppointmentBookingId: userData + '/'+ 'AIND' + '/' + Math.random().toString(36).slice(2),
       // id:key      
     })
     // .then(()=>setSelectedSlot(`${item} ${time}`))
   } 
   const handleUsersTime = async () => {
-    await db.collection('users').doc('Appointments Booked' + userData.uid).set({
-    // onlineBookings:booking.onlineBookings,
-    uid:userData.uid,
-    Doctor_name:name,
-    key:Math.random(),
-    date: new Date().toUTCString(),   
-    timeSelected : selectedSlot + '  /  ' + 'Users choice of time',
-    User_Booking_Date : new Date().toDateString(),
+    await db.collection('users').doc('Appointments Booked' + userData.uid).update({
+      // onlineBookings:booking.onlineBookings,
+      uid:userData.uid,
+      Doctor_name:name,
+      key:Math.random(),
+      date: new Date().toUTCString(),   
+      timeSelected : selectedSlot + '  /  ' + 'Users choice of time',
+      User_Booking_Date : new Date().toDateString(),
+      UserAppointmentBookingId: userData.uid + '#'+ 'AIND' + '@*%' + Math.random().toString(36).slice(2),
     }).then(() => navigation.navigate("Consultation"))
   }
 

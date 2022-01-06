@@ -37,52 +37,61 @@ const UsersProfileScreen = ({ navigation }) => {
     .catch(error => alert(error.message))
   }
 
-    // useEffect(() => {
-    //   const userData = firebase.auth().currentUser;
-    //   db.collection('users' + userData.uid).onSnapshot((querySnapshot)=>{
-    //     const users = [];
-    //     querySnapshot.docs.forEach((doc)=>{
-    //       const {name,gender,age,occupation,from, email,blood,emergency,phone} = doc.data();
-    //       users.push({
-    //         id:userData.uid,
-    //         name,
-    //         gender,
-    //         age,
-    //         occupation,
-    //         from,
-    //         email: userData.email,
-    //         blood,
-    //         emergency,
-    //         phone,
-    //       });
-    //     });
-    //     setUsers(users);
-    //   });
-    // },[]);
-    // console.log(users);
+    useEffect(() => {
+      const userData = firebase.auth().currentUser;
+      db.collection('users' + userData.uid).onSnapshot((querySnapshot)=>{
+        const users = [];
+        querySnapshot.docs.forEach((doc)=>{
+          const {name,gender,age,occupation,from, email,blood,emergency,phone} = doc.data();
+          users.push({
+            id:userData.uid,
+            name,
+            gender,
+            age,
+            occupation,
+            from,
+            email: userData.email,
+            blood,
+            emergency,
+            phone,
+          });
+        });
+        setUsers(users);
+      });
+    },[]);
+    console.log(users);
 
-    const user_profile = async() =>{
-        const users = []
-  await fetch('https://aidn.in/api/login',{
-    method:'POST',
-    headers:{
-      'Accept':'application/json',
-      'Content-Type':'application/json'
-    },
-    body:JSON.stringify({"email":Email, "password":Password})
-  }).then(res => res.json())
-  .then(resData => {
-    
-    if(resData.msg === 'successfully login'){
-      navigation.navigate('BottomTabScreen')
-      console.log(resData)
-      {handleHome}
-    }else{
-      // Alert.alert(JSON.stringify(resData));
-      Alert.alert('Invalid email or password');
-    }
-  });
-}
+    // const user_profile = async() =>{
+//     useEffect(() => {
+//     const users = []
+//     fetch('https://aidn.in/api/login',{
+//         method:'POST',
+//         headers:{
+//         'Accept':'application/json',
+//         'Content-Type':'application/json'
+//         },
+//         // body:JSON.stringify({"email":Email, "password":Password})
+//     }).then(res => res.json())
+//     .then(resData => {
+//         users.push({
+//             // name,
+//             // gender,
+//             // age,
+//             resData
+//         })
+//         setUsers(users)
+//         if((resData.msg === 'successfully login')){
+//         // navigation.navigate('BottomTabScreen')
+//         console.log(resData.name)
+//         setUsers(resData)
+//         // {handleHome}
+//         }else{
+//         Alert.alert(JSON.stringify(resData));
+//         // Alert.alert('Invalid email or password');
+//         }
+//     });
+// },[]);
+// }
 
     function profileData (){
         return(
@@ -95,7 +104,7 @@ const UsersProfileScreen = ({ navigation }) => {
                             bottomDivider
                             onPress={() => {
                             props.navigation.navigate("UserEditNow", {
-                            userId: user.id,
+                            // userId: user.id,
                             });
                             }}
                         >

@@ -71,11 +71,12 @@ const handleLogin = async() =>{
   .then(resData => {
     
     if(resData.msg === 'successfully login'){
-      navigation.navigate('BottomTabScreen')
+     navigation.navigate('BottomTabScreen')
       console.log(resData)
       {handleHome}
     }else{
       // Alert.alert(JSON.stringify(resData));
+      Alert.alert(JSON.stringify(resData));
       Alert.alert('Invalid email or password');
     }
   });
@@ -189,8 +190,8 @@ const handleLogin = async() =>{
       <TouchableOpacity
         // style={styles.buttonContainer}
         activeOpacity={0.9}
-        // onPress={handleRegister}
-        onPress={handleLogin}
+        onPress={handleRegister}
+        // onPress={handleLogin}
       >
       <View>
         <View onPress={handleHome}  style={styles.buttonContainer}>

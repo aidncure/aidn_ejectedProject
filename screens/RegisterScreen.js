@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   ScrollView,
   Alert,
+  ToastAndroid,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Fonts, Colors, Sizes } from "../constant/styles";
@@ -101,11 +102,12 @@ const RegisterScreen = ({ navigation }) => {
 // const RegisterScreen = () => {
 const [Email , setEmail] = useState('')
 const [Password , setPassword] = useState('')
-const [name , setName] = useState('')
-const [gender , setGender]= useState('')
-const [dob , setDob] = useState('')
-const [phoneNumber , setPhoneNumber] = useState('')
-const [phoneCode , setPhoneCode] = useState('+91')
+// const [loading , setLoading] = useState(false)
+// const [name , setName] = useState('')
+// const [gender , setGender]= useState('')
+// const [dob , setDob] = useState('')
+// const [phoneNumber , setPhoneNumber] = useState('')
+// const [phoneCode , setPhoneCode] = useState('+91')
 
 const handleRegister = () => {
   auth
@@ -113,9 +115,15 @@ const handleRegister = () => {
   .then(userCredentials => {
     const user = userCredentials.user;
     // console.log(user.Email);
+    // setLoading(false)
     navigation.navigate('BottomTabScreen')
   })
-  .catch(error => alert(error.message))
+  .catch(error => 
+    // alert(error.message)
+    ToastAndroid.show(error.message,
+    ToastAndroid.LONG
+    )
+  )
 }
 // }
 
@@ -315,8 +323,8 @@ const handleRegistration = async() =>{
       <TouchableOpacity
         activeOpacity={0.9}
         // onPress={()=>{SignUp}}
-        // onPress={handleRegister} //BottomTabScreen
-        onPress={handleRegistration} //BottomTabScreen
+        onPress={handleRegister} //BottomTabScreen
+        // onPress={handleRegistration} //BottomTabScreen
       >
         <View
           style={{
@@ -324,7 +332,7 @@ const handleRegistration = async() =>{
             borderRadius: Sizes.fixPadding * 3.0,
             alignItems: "center",
             justifyContent: "center",
-            marginTop: Sizes.fixPadding * 5.0,
+            marginTop: Sizes.fixPadding * 4.0,
             backgroundColor:Colors.bumbleYellow,
             width:175,
             marginHorizontal:92
@@ -336,32 +344,21 @@ const handleRegistration = async() =>{
     );
   }
 
-  function confirmPassword() {
-    //   const handleChange = (key, value) => {
-    //   setUserConfirmPassword({
-    //     [key]:value
-    //   })
-    //   console.log(value)
-    // }
+  function TandC() {
     return (
       <View
         style={{
-          // backgroundColor: "rgba(255,255,255,0.25)",
-          borderBottomWidth:1,
-          borderBottomColor:"#eee",
-          // borderRadius: Sizes.fixPadding + 15.0,
-          marginTop: Sizes.fixPadding * 4.0,
-          // paddingVertical: Sizes.fixPadding + 3.0,
-          // paddingHorizontal: Sizes.fixPadding + 15.0,
+          marginTop:28,
+
         }}
       >
-        <TextInput
-        onChangeText={value => {handleChange('userConfirmPassword', value)}}
-          placeholder="Confirm Password"
+        <Text
           style={{ ...Fonts.white16Regular }}
-          placeholderTextColor="white"
-          secureTextEntry={true}
-        />
+        >
+        By creating an account, you agree to the Aidn <Text
+         style={{ fontWeight: "bold" }}
+        >Terms of Services and Privacy Policy</Text>
+        </Text>
       </View>
     );
   }
@@ -402,12 +399,13 @@ const handleRegistration = async() =>{
             >
               Create account
             </Text>
-            {userName()}
+            {/* {userName()} */}
             {email()}
-            {genderInfo()}
+            {/* {genderInfo()}
             {dateofBirth()}
-            {phone()}
+            {phone()} */}
             {password()}
+            {TandC()}
             {continueButton()}
           </ScrollView>
         </LinearGradient>

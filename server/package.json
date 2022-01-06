@@ -4,22 +4,22 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "index.js"
+    "start": "index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "firebase-tools": "^10.0.1",
     "stripe": "^8.195.0"
   },
   "devDependencies": {
     "express": "^4.17.2",
     "nodemon": "^2.0.15"
   },
-
-  "engines" :{
+  "engines": {
     "node": "16.13.1"
   }
 }

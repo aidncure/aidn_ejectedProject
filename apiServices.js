@@ -1,37 +1,38 @@
-import React, { Component, useEffect } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { View, Text, Button, SafeAreaView } from 'react-native';
-import database from './firebase';
+// import database from './firebase';
 // import firebase from './firebase'
-import { getDatabase, ref, onValue, set } from 'firebase/database';
+// import { getDatabase, ref, onValue, set } from 'firebase/database';
 
-// export const newUser = (Id, fullName, gender, age, occupation, from) => {
-//   return new Promise(function(resolve, reject) {
-//     let key;
-//     if (Id != null) {
-//       key = Id;
-//     } else {
-//       key = database()
-//         .ref()
-//         .push().key;
-//     }
-//     let dataToSave = {
-//         Id: key,
-//         FullName: fullName,
-//         Gender:gender,
-//         Age:age,
-//         Occupation:occupation,
-//         From:from
-//     };
-//     database()
-//       .ref('newUsers/' + key)
-//       .update(dataToSave)
-//       .then(snapshot => {
-//         resolve(snapshot);
-//       })
-//       .catch(err => {
-//         reject(err);
-//       });
-//   });
+export const handleLogin = async() =>{
+  // const [Email , setEmail] = useState('')
+  // const [Password , setPassword] = useState('')
+  await fetch('https://aidn.in/api/login',{
+    method:'POST',
+    headers:{
+      'Accept':'application/json',
+      'Content-Type':'application/json'
+    },
+    body:JSON.stringify({"email":Email, "password":Password})
+  }).then(res => res.json())
+  .then(resData => {
+    
+    if(resData.msg === 'successfully login'){
+     navigation.navigate('BottomTabScreen')
+     Shredpref.setitm("token",resData["token"])
+     Shredpref.setitm("email",Email )
+     Shredpref.setitm("password",Password)
+      console.log(resData)
+      {handleHome}
+    }else{
+      // Alert.alert(JSON.stringify(resData));
+      Alert.alert('Invalid email or password');
+    }
+  });
+  const handleHome = () =>{
+  navigation.navigate('Home')
+  }
+}
 // }
 
 // export const newUser = () => {
