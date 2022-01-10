@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TextInput, Button, Alert } from "react-native";
+import { View, Text, StyleSheet, TextInput, Button, Alert, ScrollView } from "react-native";
 import { CardField, useConfirmPayment } from "@stripe/stripe-react-native";
 import {firebase, auth, firestore} from './firebase';
+import { Fonts, Colors, Sizes } from "./constant/styles";
 
 //ADD localhost address of your server
-const API_URL = "http://192.168.1.4:3000";
+const API_URL = "https://aidnexp.herokuapp.com";
 
 const StripeApp = props => {
   const db = firebase.firestore()
@@ -63,7 +64,8 @@ const StripeApp = props => {
 
   return (
     <View style={styles.container}>
-      <TextInput
+     <ScrollView>
+        <TextInput
         autoCapitalize="none"
         placeholder="E-mail"
         keyboardType="email-address"
@@ -71,7 +73,7 @@ const StripeApp = props => {
         style={styles.input}
       />
       <CardField
-        postalCodeEnabled={true}
+        // postalCodeEnabled={true}
         placeholder={{
           number: "4242 4242 4242 4242",
         }}
@@ -82,7 +84,31 @@ const StripeApp = props => {
           setCardDetails(cardDetails);
         }}
       />
-      <Button onPress={handlePayPress} title="Pay" disabled={loading} />
+      <View 
+      style={{
+        borderWidth:1,
+        height:30,
+        borderRadius:15,
+        width:'20%',
+        marginHorizontal:150,
+        backgroundColor:Colors.primary,
+        borderColor:Colors.primary,
+        justifyContent:"center",
+        alignItems:'center'
+      }}
+      disabled={loading} 
+      >
+        <Text
+         onPress={handlePayPress} disabled={loading}
+         style={{
+          color:"#fff"
+         }}       
+         >
+          Pay
+        </Text>
+      </View>
+     </ScrollView>
+      {/* <Button onPress={handlePayPress} title="Pay" disabled={loading} /> */}
     </View>
   );
 };
@@ -93,20 +119,29 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     margin: 20,
+    // backgroundColor: "#efefefef",
   },
   input: {
-    backgroundColor: "#efefefef",
-
-    borderRadius: 8,
+    // backgroundColor: "#efefefef",
+    borderBottomWidth:1,
+    borderBottomColor:"#eeee",
+    // borderRadius: 8,
     fontSize: 20,
     height: 50,
-    padding: 10,
+    padding: 8,
   },
   card: {
-    backgroundColor: "#efefefef",
+    // backgroundColor: "#efefefef",
+    borderRadius: 8,
+    borderBottomWidth:1,
+    borderBottomColor:"#eeee",
   },
   cardContainer: {
     height: 50,
     marginVertical: 30,
+    // backgroundColor: "#efefefef",
+  },
+  pay:{
+    borderRadius: 8,
   },
 });

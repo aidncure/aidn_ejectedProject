@@ -84,7 +84,7 @@ const TimeSlotScreen = ({ navigation }) => {
       timeSelected : selectedSlot + '  /  ' + 'Users choice of time',
       Doctor_name:name,
       User_Booking_Date : new Date().toDateString(),
-      // id:key      
+      type:type,
     })
     // .then(()=>setSelectedSlot(`${item} ${time}`))
   } 
@@ -98,6 +98,7 @@ const TimeSlotScreen = ({ navigation }) => {
       timeSelected : selectedSlot + '  /  ' + 'Users choice of time',
       User_Booking_Date : new Date().toDateString(),
       UserAppointmentBookingId: userData.uid + '#'+ 'AIND' + '@*%' + Math.random().toString(36).slice(2),
+      type:type,
     }).then(() => navigation.navigate("Consultation"))
   }
 

@@ -40,24 +40,26 @@ const SpecialistScreen = ({ navigation }) => {
 
   const userData = firebase.auth().currentUser;
     const db = firebase.firestore()
+    const docType = db.collection('SpecialistsList')
   const saveUsers = async () => {
       await db.collection('users').doc('Appointments Booked' + userData.uid).set({
-      nonOnlineBookings:booking.nonOnlineBookings,
+      // nonOnlineBookings:booking.nonOnlineBookings,
       uid:userData.uid,
       key:Math.random(),
       date: new Date().toUTCString(),
-      name:type,
+      name:docType.name,
       // name,
       // id:key      
     }).then(() => navigation.navigate("TimeSlots"))
   } 
   const saveOnlineUsers = async () => {
-    await db.collection('users').doc('Appointments Booked' + userData.uid).set({
+    const docType = db.collection('SpecialistsList')
+    await db.collection('users').doc('Appointments Booked' + userData.uid).update({
     onlineBookings:booking.onlineBookings,
     uid:userData.uid,
     key:Math.random(),
     date: new Date().toUTCString(),    
-    name:type,
+    // name:docType.name,
     })
   }
 
@@ -65,6 +67,7 @@ const SpecialistScreen = ({ navigation }) => {
   const [users, setUsers] = useState([]);
     useEffect(() => {
       const userData = firebase.auth().currentUser;
+      const docType = db.collection('SpecialistsList')
       db.collection('doctors').onSnapshot((querySnapshot)=>{
         const users = [];
         querySnapshot.docs.forEach((doc)=>{
@@ -75,6 +78,7 @@ const SpecialistScreen = ({ navigation }) => {
             reviews,
             rating,
             yearsOfExperience,
+            // type:docType.name,
             type,
           });
         });

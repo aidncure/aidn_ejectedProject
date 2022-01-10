@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Text, View, useWindowDimensions, FlatList, Dimensions, TouchableOpacity, StyleSheet } from "react-native";
 import { TabView, TabBar } from 'react-native-tab-view';
 import { Fonts, Colors, Sizes } from "../constant/styles";
 import { Entypo } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import Dialog from "react-native-dialog";
+import {firebase, auth, db, firestore} from '../firebase';
 
 const pastDataList = [
     {
@@ -115,14 +116,41 @@ const CancelledAppointmentScreen = () => {
 
 const { width } = Dimensions.get('screen');
 
+
+
+
 export default TabBarScreen = () => {
+
+
+    useEffect(() => {
+      const userData = firebase.auth().currentUser;
+      db.collection('Appointments Booked'+ userData.uid).onSnapshot((querySnapshot)=>{
+        const activeDataList = [];
+        querySnapshot.docs.forEach((doc)=>{
+          const {date,User_Booking_Date, Doctor_name,timeSelected,time, type} = doc.data();
+          activeDataList.push({
+            id:userData.uid + 'AIDN' + '#' +"D#N@812#A" + Math.random().toString(36).slice(2),
+            timeSelected,
+            time,
+            User_Booking_Date,
+            Doctor_name,
+            type: type,
+          });
+        });
+        setActiveDataList(activeDataList);
+      });
+    },[]);
+    console.log(activeDataList);
+    const userInfo = firebase.auth().currentUser;
+    const docHexID = db.collection('Appointments Booked'+ userInfo.uid).doc().id
+    const handleDelete = db.collection('Appointments Booked'+ userInfo.uid).doc(docHexID).delete
 
     const [activeDataList, setActiveDataList] = React.useState([
         {
             id: '1',
             date: '15 Oct 2020',
             time: '10:00 AM',
-            doctor: 'Dr.Ronan Peiterson',
+            doctor: 'Dr.Abhishek Peiterson',
             type: 'General Physician'
         },
         {
@@ -147,7 +175,7 @@ export default TabBarScreen = () => {
     const [routes] = React.useState([
         { key: 'first', title: 'Active', },
         // { key: 'second', title: 'Past' },
-        { key: 'third', title: 'Cancelled', },
+        // { key: 'third', title: 'Cancelled', },
     ]);
 
     const [showModal, setShowModal] = React.useState(false);
@@ -192,11 +220,12 @@ export default TabBarScreen = () => {
                         <TouchableOpacity
                             activeOpacity={0.9}
                             onPress={() => {
+                                handleDelete
                                 setShowModal(false);
                                 removeActive(id);
                             }}
                             style={styles.dialogYesButtonStyle}>
-                            <Text style={{ ...Fonts.white17Bold }}>Yes</Text>
+                            <Text style={{ ...Fonts.white17Bold }} onPress={handleDelete}>Yes</Text>
                         </TouchableOpacity>
                     </View>
                 </ View>
@@ -210,15 +239,15 @@ export default TabBarScreen = () => {
                 <View style={{ flexDirection: 'row', justifyContent: "space-between", marginVertical: Sizes.fixPadding * 2.0 }}>
                     <View style={{ flexDirection: 'row', }}>
                         <View style={styles.activeCircleStyle}>
-                            <Text style={{ textAlign: 'center', color: '#8ECC90', fontSize: 18, }}>{item.date}</Text>
+                            <Text style={{ textAlign: 'center', color: '#8ECC90', fontSize: 18, }}>{item.User_Booking_Date}</Text>
                         </View>
                         <View style={{ marginLeft: Sizes.fixPadding }}>
                             <Text style={{ ...Fonts.black18Bold }}>{item.time}</Text>
-                            <Text style={{ marginVertical: 8.0, ...Fonts.black16Regular }}>{item.doctor}</Text>
+                            <Text style={{ marginVertical: 8.0, ...Fonts.black16Regular }}>{item.Doctor_name}</Text>
                             <Text style={{ ...Fonts.primaryColorRegular }}>{item.type}</Text>
                         </View>
                     </View>
-                    <Entypo name="cross" size={24} color="black" onPress={() => { setShowModal(true); setId(item.id); }} />
+                    {/* <Entypo name="cross" size={24} color="black" onPress={() => { setShowModal(true); setId(item.id); }} /> */}
                 </View>
                 <View style={{ backgroundColor: Colors.lightGray, height: 0.50, }}>
                 </View>

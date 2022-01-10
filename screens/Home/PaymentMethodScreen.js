@@ -64,7 +64,13 @@ const PaymentMethodScreen = ({ navigation }) => {
   }
   function paymentModeStripe() {
     return (
-      <View>
+      <View 
+      style={{
+        // borderWidth:1,
+        // borderColor:'red',
+        height:'100%'
+      }}
+      >
           <Image
           source={require('../../assets/imagesvtr/crayon-1523.png')}
           resizeMode="contain"
@@ -76,7 +82,18 @@ const PaymentMethodScreen = ({ navigation }) => {
           justifyContent:'center'
           }}
         />
-      <TouchableOpacity
+      <View
+      style={{
+        // borderWidth:1,
+        // borderColor:'red',
+        height:'30%'
+      }}
+      >
+          <StripeProvider publishableKey="pk_test_51K84PtSGPMJ99FNgX57aaoX5J5UACm4MVzTxzs46ldk9LP9sbnEX6prObXtDcPf9baInJKUMj5uYBEUwERbwo82b00oolvcUS9">
+          <StripePay/>
+        </StripeProvider>
+      </View>
+      {/* <TouchableOpacity
           onPress={() => setCheck(true)}
           activeOpacity={0.9}
         >
@@ -110,10 +127,8 @@ const PaymentMethodScreen = ({ navigation }) => {
           }}
           >Debit or Credit card</Text>
         </View>
-        </TouchableOpacity>
-         <StripeProvider publishableKey="pk_test_51K84PtSGPMJ99FNgX57aaoX5J5UACm4MVzTxzs46ldk9LP9sbnEX6prObXtDcPf9baInJKUMj5uYBEUwERbwo82b00oolvcUS9">
-          <StripePay/>
-        </StripeProvider>
+        </TouchableOpacity> */}
+       
       </View>
     );
   }

@@ -43,6 +43,7 @@ const ConsultaionScreen = ({ navigation }) => {
   const type = navigation.getParam("type");
   const slot = navigation.getParam("selectedSlot");
   const rating = navigation.getParam("rating");
+  const docType = navigation.getParam("name");
   // const bookingDates = navigation.getParam("datesBlacklist")
 
   //  const userData = firebase.auth().currentUser; 
@@ -71,6 +72,27 @@ const ConsultaionScreen = ({ navigation }) => {
 
    const [check, setCheck] = useState(false);
    const [cash, setCash] = useState(false);
+
+    const saveTimeSlot = async () => {
+      const userInfo = firebase.auth().currentUser;
+      // const docType = db.collection('specialistsList').name
+      await db.collection('Appointments Booked' + userInfo.uid).add({
+      // nonOnlineBookings:booking.nonOnlineBookings,
+      uid:userInfo.uid,
+      key:Math.random(),
+      date: new Date().toUTCString(),
+      timeSelected : slot + '  /  ' + 'Users choice of time',
+      time : 'Appointment time is '+ ' ' + slot,
+      Doctor_name:name,
+      User_Booking_Date : new Date().toDateString(),
+      id:userInfo.uid + 'AIDN' + '#' +"D#N@812#A" + Math.random().toString(36).slice(2), 
+      type:type,
+      doctor_Type:docType,
+    })
+    // .then(()=>setSelectedSlot(`${item} ${time}`))
+  } 
+
+
   //  const [selectedSlot, setSelectedSlot] = React.useState("");
 
 
@@ -401,15 +423,18 @@ const ConsultaionScreen = ({ navigation }) => {
         onPress={() => navigation.navigate("PaymentMethod")}
       >
       <TouchableWithoutFeedback
-        // onPress={saveUserDetails}
+        onPress={saveTimeSlot}
       >
-        {/* <View style={styles.confirmButtonStyle}>
-          <Text style={{ ...Fonts.white20Regular, color:'#000' }}>Confirm & Pay</Text>
-        </View> */}
+        <View style={styles.confirmButtonStyle}
+        onPress={saveTimeSlot}
+        >
+          <Text style={{ ...Fonts.white20Regular, color:'#000' }}
+          >Add payment</Text>
+        </View>
         {/* <CardFormScreen/> */}
-        <StripeProvider publishableKey="pk_test_51K84PtSGPMJ99FNgX57aaoX5J5UACm4MVzTxzs46ldk9LP9sbnEX6prObXtDcPf9baInJKUMj5uYBEUwERbwo82b00oolvcUS9">
+        {/* <StripeProvider publishableKey="pk_test_51K84PtSGPMJ99FNgX57aaoX5J5UACm4MVzTxzs46ldk9LP9sbnEX6prObXtDcPf9baInJKUMj5uYBEUwERbwo82b00oolvcUS9">
           <StripePay/>
-        </StripeProvider>
+        </StripeProvider> */}
       </TouchableWithoutFeedback>
       </TouchableOpacity>
     );
@@ -551,36 +576,7 @@ function paymentModeStripe() {
         {/* </View> */}
         {/* </View> */}
       <View>
-        {/* <TouchableWithoutFeedback
-          onPress={()=>{Keyboard.dismiss();}}
-          >
-          <View style={styles.infoContainer}>
-              <TextInput        
-                placeholderTextColor= {Colors.primary}
-                // placeholderTextColor= "#fff"
-                placeholder='Full name'
-                // value={fullName}
-                onChangeText={(value) => handleChangeText('additional_info', value)}
-                />
-          </View>     
-        </TouchableWithoutFeedback> */}
-        {/* <Text
-        style={{marginTop:20,marginBottom:-20,alignItems:'center',justifyContent:"center",...Fonts.gray14Regular, color:'#000'}}
-        >Any other problems / previous treatments</Text> */}
-        {/* <TouchableWithoutFeedback>
-            <View style={styles.detailContainer}>
-            <TextInput      
-            // style={{
-            //   paddingTop:-100
-            // }}  
-              placeholderTextColor= {Colors.primary}
-              // placeholderTextColor= "#fff"
-              placeholder='Full name'
-              // value={fullName}
-              onChangeText={(value) => handleChangeText('additional_problems', value)}
-              />
-        </View>
-        </TouchableWithoutFeedback> */}
+        
       </View>
       </View>
     );

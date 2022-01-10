@@ -116,7 +116,8 @@ const handleRegister = () => {
     const user = userCredentials.user;
     // console.log(user.Email);
     // setLoading(false)
-    navigation.navigate('BottomTabScreen')
+    // navigation.navigate('BottomTabScreen')
+    navigation.navigate('UserEditNow')
   })
   .catch(error => 
     // alert(error.message)
@@ -150,7 +151,9 @@ const handleRegistration = async() =>{
     
     if(resData.msg === 'successfully register'){
       // navigation.navigate('Home')
-      navigation.replace('BottomTabScreen')
+      navigation.replace('UserEditNow')
+      // navigation.replace('BottomTabScreen')
+      
       // {handleHome}
     }else{
       Alert.alert(JSON.stringify(resData));

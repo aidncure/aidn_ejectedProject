@@ -68,7 +68,8 @@ const UserDataEdit = ({navigation}) => {
                 uid:userData.uid,
             })
             // alert("Saved")
-            navigation.goBack()
+            navigation.navigate('Home')
+            navigation.navigate('BottomTabScreen')
 
         }
     }
@@ -219,7 +220,8 @@ const UserDataEdit = ({navigation}) => {
       Saves user data to the firebase firestore */}
 
       <TouchableWithoutFeedback
-      onPress={() => navigation.goBack()}
+      // onPress={() => navigation.goBack()}
+      onPress={() => navigation.navigate('BottomTabScreen')}
       >
         <View style={styles.buttonMain}>
       <TouchableOpacity

@@ -48,28 +48,24 @@ const HomeScreen = ({ navigation }) => {
 
 // For Doctors Firebase
 
-  // const [doctors, setDoctors] = useState([]);
-  //   useEffect(() => {
-  //     const userData = firebase.auth().currentUser;
-  //     db.collection('doctors').onSnapshot((querySnapshot)=>{
-  //       const doctors = [];
-  //       querySnapshot.docs.forEach((doc)=>{
-  //         const {name,yearsOfExperience,rating,reviews,type} = doc.data();
-  //         doctors.push({
-  //           id:doc.id,
-  //           name,
-  //           reviews,
-  //           rating,
-  //           yearsOfExperience,
-  //           type,
-  //         });
-  //       });
-  //       setUsers(doctors);
-  //     });
-  //   },[]);
-  //   console.log(doctors);
+  const [specialistsList, setSpecialistsList] = useState([]);
+    useEffect(() => {
+      const userData = firebase.auth().currentUser;
+      db.collection('specialistsList').onSnapshot((querySnapshot)=>{
+        const specialistsList = [];
+        querySnapshot.docs.forEach((doc)=>{
+          const {name, id} = doc.data();
+          specialistsList.push({
+            id:doc.id,
+            name,
+          });
+        });
+        setSpecialistsList(specialistsList);
+      });
+    },[]);
+    console.log(specialistsList);
 
-  const specialistsList = [
+  const specialistsLists = [
     {
      id: "1",
       name: "Fever",

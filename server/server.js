@@ -1,10 +1,9 @@
-const functions = require("firebase-functions");
+// import express from "express";
+
 const express = require('express');
 const app = express();
 const stripe = require("stripe")("sk_test_51K84PtSGPMJ99FNgU57xPXcabv5IcGnheGUcNzDiDLAdcgAJFBfNkES48FqaPNvfqxcn1zGEHH9Ui1Y9F5DBWeZk00wyEo7VWR",{ apiVersion: "2020-08-27" });
 const port = process.env.PORT || 8080; //add your port here
-
-exports.payWithStripe = functions.https.onRequest((request, response) => {
 // const PUBLISHABLE_KEY = "pk_test_51K84PtSGPMJ99FNgX57aaoX5J5UACm4MVzTxzs46ldk9LP9sbnEX6prObXtDcPf9baInJKUMj5uYBEUwERbwo82b00oolvcUS9";
 // const SECRET_KEY = "sk_test_51K84PtSGPMJ99FNgU57xPXcabv5IcGnheGUcNzDiDLAdcgAJFBfNkES48FqaPNvfqxcn1zGEHH9Ui1Y9F5DBWeZk00wyEo7VWR";
 // import Stripe from "stripe";
@@ -33,5 +32,4 @@ app.post("/create-payment-intent", async (req, res) => {
     console.log(e.message);
     res.json({ error: e.message });
   }
-});
 });
