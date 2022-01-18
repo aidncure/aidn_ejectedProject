@@ -623,8 +623,8 @@ const HomeScreen = ({ navigation }) => {
         }}
       />      
     </TouchableOpacity>
-        {disease()}
-        {diseasesList()}
+        {/* {disease()}
+        {diseasesList()} */}
         {aidnCureBanner()}
         {instantRelief()}
         {coughBanner()}
@@ -635,8 +635,8 @@ const HomeScreen = ({ navigation }) => {
 
   function header() {
     const refRBSheet = useRef();
-    const [city, setCity] = useState("Bangalore");
-    const cityList = ["Bangalore", "Mumbai", "Chennai"];
+    const [city, setCity] = useState("India");
+    const cityList = ["India", "Singapore", "United States"];
 
     return (
       <View style={styles.headerStyle}>
@@ -698,7 +698,7 @@ const HomeScreen = ({ navigation }) => {
   }
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
-      <StatusBar translucent={false} backgroundColor="rgba(0,0,0,0)" />
+      <StatusBar translucent={false} backgroundColor="#ffff" />
       <FlatList
         // ListHeaderComponent={
         //   <>
@@ -739,10 +739,10 @@ const HomeScreen = ({ navigation }) => {
       {pharma()}
       {pharmacyBanner()}
       {pharmasList()}
-      {disease()}
-      {diseasesList()}
-      {aidnCureBanner()}
+      {/* {disease()}
+      {diseasesList()} */}
       {instantRelief()}
+      {aidnCureBanner()}
       {coughBanner()}
       {aidnCureViewAll()}
     </ScrollView>

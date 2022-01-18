@@ -68,18 +68,22 @@ const SpecialistScreen = ({ navigation }) => {
     useEffect(() => {
       const userData = firebase.auth().currentUser;
       const docType = db.collection('SpecialistsList')
-      db.collection('doctors').onSnapshot((querySnapshot)=>{
+      db.collection('doctors').where('type','==', type).onSnapshot((querySnapshot)=>{
         const users = [];
         querySnapshot.docs.forEach((doc)=>{
-          const {name,yearsOfExperience,rating,reviews,type} = doc.data();
+          const {name,yearsOfExperience,rating,reviews,type,description,image,price,uid,ext} = doc.data();
           users.push({
             id:doc.id,
             name,
             reviews,
             rating,
             yearsOfExperience,
-            // type:docType.name,
+            description,
             type,
+            image,
+            price,
+            uid,
+            ext,
           });
         });
         setUsers(users);
@@ -272,9 +276,12 @@ const SpecialistScreen = ({ navigation }) => {
                 navigation.navigate("TimeSlots", {
                   image: item.image,
                   name: item.name,
+                  uid:item.uid,
                   type: type,
                   experience: item.yearsOfExperience,
                   rating: item.rating,
+                  price:item.price,
+                  ext:item.ext,
                 })
               }
               >
@@ -297,9 +304,14 @@ const SpecialistScreen = ({ navigation }) => {
                 navigation.navigate("TimeSlots", {
                   image: item.image,
                   name: item.name,
+                  uid:item.uid,
                   type: type,
                   experience: item.yearsOfExperience,
                   rating: item.rating,
+                  description:item.description,
+                  price:item.price,
+                  ext:item.ext,
+
                 })
               }
               >

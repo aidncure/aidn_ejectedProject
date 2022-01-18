@@ -6,6 +6,7 @@ import { Fonts, Colors, Sizes } from "./constant/styles";
 
 //ADD localhost address of your server
 const API_URL = "https://aidnexp.herokuapp.com";
+// const API_URL = "http://192.168.1.4:3000";
 
 const StripeApp = props => {
   const db = firebase.firestore()

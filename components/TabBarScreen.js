@@ -1,8 +1,9 @@
 import React, { useState,useEffect } from "react";
-import { Text, View, useWindowDimensions, FlatList, Dimensions, TouchableOpacity, StyleSheet } from "react-native";
+import { Text, View, useWindowDimensions, FlatList, Dimensions, TouchableOpacity, StyleSheet, Linking } from "react-native";
 import { TabView, TabBar } from 'react-native-tab-view';
 import { Fonts, Colors, Sizes } from "../constant/styles";
-import { Entypo } from '@expo/vector-icons';
+import { Entypo,Ionicons } from '@expo/vector-icons';
+// import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome5 } from '@expo/vector-icons';
 import Dialog from "react-native-dialog";
 import {firebase, auth, db, firestore} from '../firebase';
@@ -127,7 +128,7 @@ export default TabBarScreen = () => {
       db.collection('Appointments Booked'+ userData.uid).onSnapshot((querySnapshot)=>{
         const activeDataList = [];
         querySnapshot.docs.forEach((doc)=>{
-          const {date,User_Booking_Date, Doctor_name,timeSelected,time, type} = doc.data();
+          const {date,User_Booking_Date, Doctor_name,timeSelected,time,type,ext} = doc.data();
           activeDataList.push({
             id:userData.uid + 'AIDN' + '#' +"D#N@812#A" + Math.random().toString(36).slice(2),
             timeSelected,
@@ -135,6 +136,7 @@ export default TabBarScreen = () => {
             User_Booking_Date,
             Doctor_name,
             type: type,
+            ext,
           });
         });
         setActiveDataList(activeDataList);
@@ -228,7 +230,7 @@ export default TabBarScreen = () => {
                             <Text style={{ ...Fonts.white17Bold }} onPress={handleDelete}>Yes</Text>
                         </TouchableOpacity>
                     </View>
-                </ View>
+                </View>
             </Dialog.Container>
         )
     }
@@ -245,9 +247,41 @@ export default TabBarScreen = () => {
                             <Text style={{ ...Fonts.black18Bold }}>{item.time}</Text>
                             <Text style={{ marginVertical: 8.0, ...Fonts.black16Regular }}>{item.Doctor_name}</Text>
                             <Text style={{ ...Fonts.primaryColorRegular }}>{item.type}</Text>
+                            <Text style={{ ...Fonts.black16Bold }}>Ext.({item.ext})</Text>
                         </View>
                     </View>
-                    {/* <Entypo name="cross" size={24} color="black" onPress={() => { setShowModal(true); setId(item.id); }} /> */}
+                </View>
+                {/* <Entypo name="cross" size={24} color="black" onPress={() => { setShowModal(true); setId(item.id); }} /> */}
+                <View
+                style={{
+                marginLeft: 100,
+                marginTop:-10,
+                paddingBottom:10,
+                // borderWidth:1,
+                height:50
+                }}
+                >
+                <Ionicons
+                name="call-outline"
+                size={22} 
+                color={Colors.dodgerBlue} 
+                style={{
+                marginTop:5,
+                // paddingTop:10
+                }}
+                onPress={() => { Linking.openURL(`tel:01204767359`) }}
+                />
+                <View
+                style={{
+                marginLeft: 30,
+                width:'40%',
+                marginTop:-25,
+                // marginBottom:-2,
+                // borderWidth:1,
+                }}
+                >
+                <Text  onPress={() => { Linking.openURL(`tel:01204767359`) }} style={{ ...Fonts.primaryColor17Bold }}>01204767359</Text>
+                </View>
                 </View>
                 <View style={{ backgroundColor: Colors.lightGray, height: 0.50, }}>
                 </View>

@@ -57,6 +57,9 @@ const TimeSlotScreen = ({ navigation }) => {
   const rating = navigation.getParam("rating");
   const UserAppointmentBookingId = navigation.getParam("UserAppointmentBookingId");
   const datesBlacklistFunction = navigation.getParam("datesBlacklist")
+  const price = navigation.getParam("price")
+  const docuid = navigation.getParam("uid")
+  const ext = navigation.getParam("ext")
 
   const [selectedSlot, setSelectedSlot] = React.useState("");
 
@@ -69,13 +72,14 @@ const TimeSlotScreen = ({ navigation }) => {
       // onlineBookings: 'Video Consultation',
       uid:' ',
       key:'',
-      // date:'',
+      // date:'',vig
       // timeSelected,
   });
 
    const userData = firebase.auth().currentUser;
     const db = firebase.firestore()
-  const saveTimeSlot = async () => {
+    const saveTimeSlot = async () => {
+      // const doctorUID = db.collection('doctors').doc(uid)
       await db.collection('users').doc('Appointments Booked' + userData.uid).set({
       // nonOnlineBookings:booking.nonOnlineBookings,
       uid:userData.uid,
@@ -85,20 +89,29 @@ const TimeSlotScreen = ({ navigation }) => {
       Doctor_name:name,
       User_Booking_Date : new Date().toDateString(),
       type:type,
+      email:userData.email,
+      docuid:docuid,
+      ext:ext,
     })
     // .then(()=>setSelectedSlot(`${item} ${time}`))
   } 
   const handleUsersTime = async () => {
+    // const doctorUID = db.collection('doctors').doc(uid)
     await db.collection('users').doc('Appointments Booked' + userData.uid).update({
       // onlineBookings:booking.onlineBookings,
       uid:userData.uid,
       Doctor_name:name,
+      //doctertuid
+      docuid:docuid,
       key:Math.random(),
       date: new Date().toUTCString(),   
       timeSelected : selectedSlot + '  /  ' + 'Users choice of time',
       User_Booking_Date : new Date().toDateString(),
       UserAppointmentBookingId: userData.uid + '#'+ 'AIND' + '@*%' + Math.random().toString(36).slice(2),
       type:type,
+      email:userData.email,
+      ext:ext,
+      // docuid:doctorUID,
     }).then(() => navigation.navigate("Consultation"))
   }
 
@@ -143,6 +156,8 @@ const TimeSlotScreen = ({ navigation }) => {
                   experience,
                   datesBlacklistFunction,
                   UserAppointmentBookingId,
+                  price,
+                  ext,
                 })
               }
             >
@@ -168,7 +183,8 @@ const TimeSlotScreen = ({ navigation }) => {
           <Text
             style={{ ...Fonts.black20Bold, marginTop: Sizes.fixPadding - 2.0 }}
           >
-            $39
+            {/* $39 */}
+            {'\u20B9'}{price}
           </Text>
         </View>
       </View>
@@ -293,6 +309,9 @@ const TimeSlotScreen = ({ navigation }) => {
               selectedSlot,
               rating,
               datesBlacklistFunction,
+              price,
+              docuid,
+              ext,
             })
           }
         >
