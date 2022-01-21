@@ -1,4 +1,6 @@
 rootProject.name = 'aidn_Doctor'
+include ':react-native-svg'
+project(':react-native-svg').projectDir = new File(rootProject.projectDir, '../../../Dropbox/PC/Desktop/aidn_Doctor/node_modules/react-native-svg/android')
 include ':react-native-randombytes'
 project(':react-native-randombytes').projectDir = new File(rootProject.projectDir, '../../../Dropbox/PC/Desktop/aidn_Doctor/node_modules/react-native-randombytes/android')
 

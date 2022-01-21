@@ -112,7 +112,7 @@ const UsersProfileScreen = ({ navigation }) => {
                         {/* Users details code executed */}
                      {/*User Full Name  */}
                     <View style={{
-                    marginVertical:160,
+                    marginVertical:150,
                     marginHorizontal:40,
                     // borderWidth:1,
                     height:25,
@@ -420,7 +420,7 @@ const UsersProfileScreen = ({ navigation }) => {
                  marginHorizontal:100,
                  height:40,
                  borderRadius:100,
-                 marginVertical:10
+                 marginVertical:60
              }}
              onPress={handleLogout}
              >
@@ -469,12 +469,12 @@ const styles = StyleSheet.create({
   imageContainer:{
       width:200,
       height:200,
-      marginVertical:-130,
-      marginHorizontal:125,
+       marginVertical:-120,
+      marginHorizontal:110,
       borderRadius:100,
       backgroundColor:"#fff",
-      borderWidth:3,
-      borderColor:'#eee',
+      borderWidth:2,
+      borderColor:'#fff',
   },
   cog:{
      width:35,

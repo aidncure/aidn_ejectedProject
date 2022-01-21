@@ -6,6 +6,8 @@ import HomeScreen from "../screens/Home/HomeScreen";
 import ScheduleScreen from "../screens/Schedule/ScheduleScreen";
 import ChatScreen from "../screens/Chat/ChatScreen";
 import ProfileScreen from "../screens/Profile/ProfileScreen";
+import QrScreen from "../screens/Profile/QrScreen";
+import UsersProfileScreen from "../screens/Profile/userProfileScreen"
 import { Entypo } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -21,9 +23,9 @@ const TabNavigator = createAppContainer(
                     tabBarIcon: ({ tintColor, focused }) => (
                         focused ?
                             <TouchableOpacity style={styles.circleStyle}>
-                                <Entypo name="home" size={24} color={tintColor} />
+                                <Ionicons name="logo-electron" size={24} color={tintColor} />
                             </TouchableOpacity>
-                            : <Entypo name="home" size={24} color={tintColor} />
+                            : <Ionicons name="logo-electron" size={24} color={tintColor} />
                     ),
                 },
             },
@@ -34,36 +36,36 @@ const TabNavigator = createAppContainer(
                     tabBarIcon: ({ tintColor, focused }) => (
                         focused ?
                             <TouchableOpacity style={styles.circleStyle}>
-                                <FontAwesome5 name="calendar-alt" size={24} color={tintColor} />
+                                <Ionicons name="newspaper-outline" size={24} color={tintColor} />
                             </TouchableOpacity>
-                            : <FontAwesome5 name="calendar-alt" size={24} color={tintColor} />
+                            : <Ionicons name="newspaper-outline" size={24} color={tintColor} />
                     ),
                 },
             },
             Chat: {
-                screen: ChatScreen,
+                screen: QrScreen,
                 navigationOptions: {
                     tabBarLabel: 'Chat',
                     tabBarIcon: ({ tintColor, focused }) => (
                         focused ?
                             <TouchableOpacity style={styles.circleStyle}>
-                                <MaterialIcons name="chat" size={24} color={tintColor} />
+                                <Ionicons name="qr-code-outline" size={24} color={tintColor} />
                             </TouchableOpacity>
-                            : <MaterialIcons name="chat" size={24} color={tintColor} />
+                            : <Ionicons name="qr-code-outline" size={24} color={tintColor} />
                     ),
                 }
             },
             Profile: {
-                screen: ProfileScreen,
+                screen: UsersProfileScreen,
                 navigationOptions: {
                     header: () => null,
                     tabBarLabel: 'Profile',
                     tabBarIcon: ({ tintColor, focused }) => (
                         focused ?
                             <TouchableOpacity style={styles.circleStyle}>
-                                <Ionicons name="person" size={24} color={tintColor} />
+                                <Ionicons name="happy-outline" size={24} color={tintColor} />
                             </TouchableOpacity>
-                            : <Ionicons name="person" size={24} color={tintColor} />
+                            : <Ionicons name="happy-outline" size={24} color={tintColor} />
                     ),
                 }
             },

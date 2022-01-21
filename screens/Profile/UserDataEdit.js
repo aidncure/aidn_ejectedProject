@@ -1,5 +1,5 @@
 import React, { Component, useState, useEffect } from 'react';
-import {View, Text, Button, SafeAreaView,StatusBar, StyleSheet,TouchableOpacity,TextInput, Keyboard,TouchableWithoutFeedback,ScrollView} from 'react-native';
+import {View, Text, Button, SafeAreaView,StatusBar, StyleSheet,TouchableOpacity,TextInput,Image,Keyboard,TouchableWithoutFeedback,ScrollView} from 'react-native';
 import { Ionicons } from "@expo/vector-icons";
 import { Fonts, Colors, Sizes } from "../../constant/styles";
 import { fetchUser, newUser, } from "../../apiServices";
@@ -100,8 +100,11 @@ const UserDataEdit = ({navigation}) => {
       </View>
       
       <View style={styles.bottomProfileContainer}>
-      <View style={styles.imageContainer}>
-      </View>
+      {/* <View style={styles.imageContainer}> */}
+      <Image source={require('../../assets/imagesvtr/buddy-97.png')}
+          style={styles.imageContainer}
+      />
+      {/* </View> */}
       <TouchableWithoutFeedback
       onPress={()=>{Keyboard.dismiss();}}
       >
@@ -331,7 +334,7 @@ const styles = StyleSheet.create({
       marginBottom:-95,
       marginHorizontal:122,
       borderRadius:100,
-      backgroundColor:"#eee"
+      backgroundColor:"#fff"
   },
   genderDOBContainer:{
     color:'#000',

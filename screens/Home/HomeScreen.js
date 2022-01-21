@@ -25,6 +25,16 @@ const { width } = Dimensions.get("window");
 const HomeScreen = ({ navigation }) => {
 
 
+   const handleLogout = () => {
+    auth
+    .signOut()
+    .then(() => {
+      navigation.replace("Welcome")
+    })
+    .catch(error => alert(error.message))
+  }
+
+
   const [users, setUsers] = useState([]);
     useEffect(() => {
       const userData = db.collection('Labs').doc()
@@ -688,10 +698,13 @@ const HomeScreen = ({ navigation }) => {
           </View>
         </TouchableOpacity>
         <Ionicons
-          name="notifications"
-          size={20}
-          color={Colors.primary}
-          onPress={() => navigation.navigate("Notification")}
+          // name="notifications-circle-outline"
+          name="power-outline"
+          size={24}
+          // color={Colors.primary}
+          color='#D2042D'
+          // onPress={() => navigation.navigate("Notification")}
+          onPress={handleLogout}
         />
       </View>
     );
