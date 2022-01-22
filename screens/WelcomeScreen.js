@@ -188,12 +188,12 @@ const handleLogin = async() =>{
   function continueButton() {
     return (
       <TouchableOpacity
-        // style={styles.buttonContainer}
+        style={{width:125}}
         activeOpacity={0.9}
         onPress={handleRegister}
         // onPress={handleLogin}
       >
-      <View>
+      <View  style={{width:125}}>
         <View onPress={handleHome}  style={styles.buttonContainer}>
         <Text style={{ ...Fonts.white16Bold, color:'#000' }}>Proceed</Text>
         </View>
@@ -361,6 +361,7 @@ const styles = StyleSheet.create({
     // marginTop: Sizes.fixPadding * 5.0,
     backgroundColor:Colors.bumbleYellow,
     width:125,
+    // borderWidth:1
     // marginHorizontal:92
   },
   registerButton:{

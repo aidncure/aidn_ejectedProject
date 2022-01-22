@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import {
   Text,
   View,
@@ -8,13 +8,35 @@ import {
   TouchableHighlight,
   Image,
   StyleSheet,
+  TouchableOpacity,
+  Linking,
 } from "react-native";
 import { Fonts, Colors, Sizes } from "../../constant/styles";
 import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { ScrollView, TouchableWithoutFeedback } from "react-native-gesture-handler";
+import {firebase, auth, db, firestore} from '../../firebase';
 
 const ShowMoreScreen = ({ navigation }) => {
+
+  const [users, setUsers] = useState([]);
+    useEffect(() => {
+      const userData = db.collection('Labs').doc()
+      db.collection('instantrelief').onSnapshot((querySnapshot)=>{
+        const users = [];
+        querySnapshot.docs.forEach((doc)=>{
+          const {id,name,image} = doc.data();
+          users.push({
+            id:id,
+            name,
+            image,
+          });
+        });
+        setUsers(users);
+      });
+  },[]);
+  console.log(users);
+
   function header() {
     return (
       <View style={styles.headerStyle}>
@@ -67,6 +89,7 @@ const ShowMoreScreen = ({ navigation }) => {
 
   function aidnCureBanner() {
     return (
+      <TouchableOpacity onPress={() => navigation.navigate("ViewAll")}>
        <View style={{ alignItems:'center', justifyContent:'center', backgroundColor:"#fff"}}>
         <Image
         source={require("../../assets/frequentMigranes.png")}
@@ -78,10 +101,13 @@ const ShowMoreScreen = ({ navigation }) => {
         borderRadius={30}
       ></Image>
      </View>
+     </TouchableOpacity>
     );
   }
     function healthBanner() {
     return (
+      <TouchableOpacity 
+      onPress={ ()=> Linking.openURL('https://forms.gle/sc6VXstoN3TsddoT7') }>
       <View style={{ alignItems:'center', justifyContent:'center', width:'100%'}}>
       <Image
         source={require("../../assets/specialistImg/healthCoverageAidn.png")}
@@ -96,6 +122,7 @@ const ShowMoreScreen = ({ navigation }) => {
         borderRadius={5}
       ></Image>
       </View>
+      </TouchableOpacity>
     );
   }
 //    function coughBanner() {
@@ -153,7 +180,7 @@ const ShowMoreScreen = ({ navigation }) => {
       >
         <View style={styles.specialistStyle}>
           <Image
-            source={item.image}
+            source={{uri:item.image}}
             resizeMode="contain"
             style={{ height: 128, width: "100%", borderRadius:30}}
           />
@@ -172,7 +199,8 @@ const ShowMoreScreen = ({ navigation }) => {
         }}
       >
         <FlatList
-          data={specialistsList}
+          // data={specialistsList}
+          data={users}
           keyExtractor={(item) => `${item.id}`}
           renderItem={renderItem}
           contentContainerStyle={{ paddingHorizontal: Sizes.fixPadding }}

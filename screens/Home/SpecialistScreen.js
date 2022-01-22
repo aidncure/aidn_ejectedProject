@@ -40,7 +40,8 @@ const SpecialistScreen = ({ navigation }) => {
 
   const userData = firebase.auth().currentUser;
     const db = firebase.firestore()
-    const docType = db.collection('SpecialistsList')
+    // const docType = db.collection('SpecialistsList')
+    const docType = db.collection('specialities')
   const saveUsers = async () => {
       await db.collection('users').doc('Appointments Booked' + userData.uid).set({
       // nonOnlineBookings:booking.nonOnlineBookings,
@@ -206,7 +207,7 @@ const SpecialistScreen = ({ navigation }) => {
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <View style={styles.doctorImageContainerStyle}>
               <Image
-                source={item.image}
+                source={{uri:item.image}}
                 resizeMode="contain"
                 style={{
                   height: 109.0,
@@ -384,7 +385,7 @@ const styles = StyleSheet.create({
     height: 110.0,
     width: 110.0,
     borderRadius: 75.0,
-    backgroundColor: "#eee",
+    // backgroundColor: "#eee",
     borderColor: "#eee",
     borderWidth: 1.0,
     marginHorizontal: Sizes.fixPadding * 2.0,

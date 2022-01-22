@@ -41,7 +41,8 @@ return(
             </View>
             <View style={{justifyContent:'center', alignItems:'center', marginTop:50}}>
               <Text style={{...Fonts.blackRegular, fontSize:24}}>
-              Aidn auxiliary
+              {/* Aidn auxiliary */}
+              Aidn pulse coming soon
             </Text>
             </View>
         </View>
@@ -60,7 +61,7 @@ return(
         <View style={styles.secondContainer}
         onPress={ ()=> Linking.openURL('https://aidn.in/') }
         >
-        <Image source={require('../../assets/imagesvtr/aidn_pulse.png')}
+        <Image source={require('../../assets/imagesvtr/QRtiger.png')}
           style={{
             width:150,
             height:150
@@ -71,7 +72,7 @@ return(
         <View style={styles.thirdContainer}
         onPress={ ()=> Linking.openURL('https://aidn.in/') }
         >
-        <Image source={require('../../assets/imagesvtr/aidn_magento.png')}
+        <Image source={require('../../assets/imagesvtr/QRtiger.png')}
         style={{
           width:150,
           height:150
@@ -130,8 +131,8 @@ const styles = StyleSheet.create({
       marginHorizontal:20,
       borderRadius:100,
       backgroundColor:"#fff",
-      borderWidth:2,
-      borderColor:Colors.primary,
+      // borderWidth:2,
+      // borderColor:Colors.primary,
   },
    thirdContainer:{
       width:150,
@@ -140,8 +141,8 @@ const styles = StyleSheet.create({
       marginHorizontal:240,
       borderRadius:100,
       backgroundColor:"#fff",
-      borderWidth:2,
-      borderColor:Colors.dodgerBlue,
+      // borderWidth:2,
+      // borderColor:Colors.dodgerBlue,
   },
 })
 

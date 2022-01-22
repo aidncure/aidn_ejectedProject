@@ -13,7 +13,7 @@ import {
   Dimensions,
   Keyboard,
   ScrollView,
-  // Image
+  Linking,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Fonts, Colors, Sizes } from "../../constant/styles";
@@ -41,13 +41,14 @@ const HomeScreen = ({ navigation }) => {
       db.collection('Labs').onSnapshot((querySnapshot)=>{
         const users = [];
         querySnapshot.docs.forEach((doc)=>{
-          const {facility, labName, labAddress,key} = doc.data();
+          const {facility, labName, labAddress,key,image} = doc.data();
           users.push({
             id:userData.id,
             key,
             facility,
             labName,
             labAddress,
+            image,
           });
         });
         setUsers(users);
@@ -61,13 +62,15 @@ const HomeScreen = ({ navigation }) => {
   const [specialistsList, setSpecialistsList] = useState([]);
     useEffect(() => {
       const userData = firebase.auth().currentUser;
-      db.collection('specialistsList').onSnapshot((querySnapshot)=>{
+      // db.collection('specialistsList').onSnapshot((querySnapshot)=>{
+      db.collection('specialities').onSnapshot((querySnapshot)=>{
         const specialistsList = [];
         querySnapshot.docs.forEach((doc)=>{
-          const {name, id} = doc.data();
+          const {name, id,image} = doc.data();
           specialistsList.push({
             id:doc.id,
             name,
+            image,
           });
         });
         setSpecialistsList(specialistsList);
@@ -231,6 +234,7 @@ const HomeScreen = ({ navigation }) => {
   }
   function basicInsurance() {
     return (
+      <TouchableOpacity onPress={ ()=> Linking.openURL('https://forms.gle/pXqgFRceVe2AuUjG9') }>
       <View style={{ alignItems:'center', justifyContent:'center', width:'100%'}}>
       <Image
         source={require("../../assets/images/Basic_Insurance.png")}
@@ -247,10 +251,12 @@ const HomeScreen = ({ navigation }) => {
         borderRadius={5}
       ></Image>
       </View>
+      </TouchableOpacity>
     );
   }
   function standardInsurance() {
     return (
+      <TouchableOpacity onPress={ ()=> Linking.openURL('https://forms.gle/pXqgFRceVe2AuUjG9') }>
       <View style={{ alignItems:'center', justifyContent:'center', width:'100%'}}>
       <Image
         source={require("../../assets/images/Standard_Insurance.png")}
@@ -264,10 +270,12 @@ const HomeScreen = ({ navigation }) => {
         borderRadius={5}
       ></Image>
       </View>
+      </TouchableOpacity>
     );
   }
   function premiumInsurance() {
     return (
+      <TouchableOpacity onPress={ ()=> Linking.openURL('https://forms.gle/pXqgFRceVe2AuUjG9') }>
       <View style={{ alignItems:'center', justifyContent:'center', width:'100%'}}>
        <Image
         source={require("../../assets/images/premiumInsurance.png")}
@@ -281,6 +289,7 @@ const HomeScreen = ({ navigation }) => {
         borderRadius={5}
       ></Image>
       </View>
+      </TouchableOpacity>
     );
   }
 
@@ -308,7 +317,7 @@ const HomeScreen = ({ navigation }) => {
       >
         <View style={styles.specialistInfoContainer}>
           <Image
-            source={item.image}
+            source={{uri: item.image}}
             resizeMode="contain"
             style={{ height: 80.0, width: 80.0 }}
           />
@@ -357,7 +366,7 @@ const HomeScreen = ({ navigation }) => {
       style={styles.labAndCheckUpContainer}
     >
       <Image
-        source={item.image}
+        source={{uri:item.image}}
         style={{
           height: 125,
           width:150,
@@ -532,6 +541,7 @@ const HomeScreen = ({ navigation }) => {
 
    function pharmacyBanner() {
     return (
+      // <TouchableOpacity onPress={()=>navigation.navigate("LabTestAndCheckUp")}>
       <View style={{ alignItems:'center', justifyContent:'center', width:'100%'}}>
       <Image
         source={require("../../assets/frequent_migranes.png")}
@@ -545,11 +555,15 @@ const HomeScreen = ({ navigation }) => {
         borderRadius={5}
       ></Image>
       </View>
+      // </TouchableOpacity>
     );
   }
    function aidnCureBanner() {
     return (
-       <View style={{ alignItems:'center', justifyContent:'center'}}>
+      <TouchableOpacity onPress={() => navigation.navigate("ShowMore")}>
+       <View style={{ alignItems:'center', justifyContent:'center'}}
+        onPress={() => navigation.navigate("ShowMore")}
+       >
         <Image
         source={require("../../assets/specialistImg/AidnCureServices.png")}
         resizeMode="contain"
@@ -563,11 +577,15 @@ const HomeScreen = ({ navigation }) => {
         borderRadius={5}
       ></Image>
      </View>
+     </TouchableOpacity>
     );
   }
    function coughBanner() {
     return (
-       <View style={{ alignItems:'center', justifyContent:'center'}}>
+      <TouchableOpacity onPress={() => navigation.navigate("ShowMore")}>
+       <View style={{ alignItems:'center', justifyContent:'center'}}
+        onPress={() => navigation.navigate("ShowMore")}
+       >
         <Image
         source={require("../../assets/specialistImg/Frequently_coughing.png")}
         resizeMode="contain"
@@ -579,6 +597,7 @@ const HomeScreen = ({ navigation }) => {
           marginHorizontal: Sizes.fixPadding * 2.0,          
         }}
         borderRadius={5}
+        onPress={() => navigation.navigate("ShowMore")}
       ></Image>
       {/* Covid Test Banner */}
         <Image
@@ -592,6 +611,7 @@ const HomeScreen = ({ navigation }) => {
           marginHorizontal: Sizes.fixPadding * 2.0,          
         }}
         borderRadius={5}
+        onPress={() => navigation.navigate("ShowMore")}
       ></Image>
       {/* Dental CheckUp Banner */}
         <Image
@@ -605,8 +625,10 @@ const HomeScreen = ({ navigation }) => {
           marginHorizontal: Sizes.fixPadding * 2.0,          
         }}
         borderRadius={5}
+        onPress={() => navigation.navigate("ShowMore")}
       ></Image>
      </View>
+     </TouchableOpacity>
     );
   }
 
@@ -626,7 +648,7 @@ const HomeScreen = ({ navigation }) => {
       style={styles.labAndCheckUpContainer}
     >
       <Image
-        source={item.image}
+        source={{uri:item.image}}
         style={{
           height: 125,
           width:150,
@@ -844,13 +866,13 @@ const styles = StyleSheet.create({
     // justifyContent:'center',
     borderRadius:8,
     backgroundColor: "white",
-    borderColor: Colors.lightGray,
-    borderWidth: 1,
+    borderColor: "#eee",
+    // borderWidth: 1,
     shadowColor: '#eee',
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.5,
     shadowRadius: 10,
-    elevation: 2,
+    // elevation: 2,
     marginBottom: 20.0,
     overflow: "hidden",
   },

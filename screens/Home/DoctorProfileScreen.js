@@ -126,11 +126,11 @@ const DoctorProfileScreen = ({ navigation }) => {
           </View>
         </View>
 
-        <View style={{ position: "absolute", right: 20.0 }}>
+        <View style={{ position: "absolute", right: 20.0 ,marginTop:-50 }}>
           <Image
-            source={image}
+            source={{uri:image}}
             resizeMode="contain"
-            style={{ overflow: "hidden", height: 360.0, width: 210 }}
+            style={{ overflow: "hidden", height: 360.0, width: 210,borderRadius:5 }}
           />
         </View>
       </View>

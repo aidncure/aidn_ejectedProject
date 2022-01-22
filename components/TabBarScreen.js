@@ -292,7 +292,8 @@ export default TabBarScreen = () => {
         return (
             activeDataList.length === 0 ?
                 <View style={styles.noActiveDataContainerStyle}>
-                    <FontAwesome5 name="calendar-alt" size={70} color='gray' />
+                    {/* <FontAwesome5 name="calendar-alt" size={70} color='gray' /> */}
+                    <Ionicons name="happy-outline" size={70} color={Colors.lightGray} />
                     <Text style={{ ...Fonts.gray17Regular, marginTop: Sizes.fixPadding * 2.0 }}>No Active Appointments</Text>
                 </View> :
                 <View style={{ flex: 1, backgroundColor: 'white', marginHorizontal: Sizes.fixPadding * 2.0, }}>

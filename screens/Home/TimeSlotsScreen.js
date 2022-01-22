@@ -126,7 +126,7 @@ const TimeSlotScreen = ({ navigation }) => {
       >
         <View style={styles.doctorImageContainerStyle}>
           <Image
-            source={image}
+            source={{uri:image}}
             resizeMode="contain"
             style={{
               height: 90.0,

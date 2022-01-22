@@ -8,11 +8,13 @@ import {
   FlatList,
   TouchableOpacity,
   StyleSheet,
+  Dimensions,
 } from "react-native";
 import { Fonts, Colors, Sizes } from "../../constant/styles";
 import MapView, { Marker } from "react-native-maps";
 import { Feather } from "@expo/vector-icons";
 import {firebase, auth, db, firestore} from '../../firebase';
+import { ScrollView } from "react-native-gesture-handler";
 // import { useEffect } from "react";
 
 
@@ -38,6 +40,7 @@ const facilitiesList = [
     facility: "Report doorstep drop available",
   },
 ];
+// const { width } = Dimensions.get("window");
 
 const LabTestAndHealthCheckUpScreen = ({ navigation }) => {
   const image = navigation.getParam("image");
@@ -52,12 +55,13 @@ const LabTestAndHealthCheckUpScreen = ({ navigation }) => {
       db.collection('Labs').onSnapshot((querySnapshot)=>{
         const users = [];
         querySnapshot.docs.forEach((doc)=>{
-          const {facility, labName, labAddress} = doc.data();
+          const {facility, labName, labAddress,image} = doc.data();
           users.push({
             id:userData.id,
             facility,
             labName,
             labAddress,
+            image,
           });
         });
         setUsers(users);
@@ -69,7 +73,7 @@ const LabTestAndHealthCheckUpScreen = ({ navigation }) => {
     return (
       <View style={styles.labInfoContainerStyle}>
         <Image
-          source={image}
+          source={{uri:image}}
           style={{
             height: 90.0,
             width: 90.0,
@@ -154,20 +158,42 @@ const LabTestAndHealthCheckUpScreen = ({ navigation }) => {
     return (
       <View style={styles.mapContainerStyle}>
         <MapView
-          style={{ height: 270.0 }}
+          style={styles.map}
+          // style={{ height: 270.0 }}
           initialRegion={{
-            latitude: 37.33233141,
-            longitude: -122.0312186,
+            latitude: 20.5937, 
+            longitude: 78.9629,
             latitudeDelta: 0.1,
             longitudeDelta: 0.1,
+            
           }}
         >
           <Marker
-            coordinate={{ latitude: 37.33233141, longitude: -122.0312186 }}
+            coordinate={{ latitude: 20.5937, longitude: 78.9629 }}
             pinColor={"red"}
           />
         </MapView>
       </View>
+    );
+  }
+    function healthBanner() {
+    return (
+      <TouchableOpacity onPress={() => navigation.navigate("ShowMore")}>
+      <View style={{ alignItems:'center', justifyContent:'center', width:'100%'}}>
+      <Image
+        source={require("../../assets/specialistImg/healthCoverageAidn.png")}
+        style={{
+          height: 400,
+          // marginTop:2,
+          marginBottom:20,
+        //   width:'100%',
+        width:"95%",
+          // marginHorizontal: Sizes.fixPadding * 2.0,
+        }}
+        borderRadius={5}
+      ></Image>
+      </View>
+      </TouchableOpacity>
     );
   }
 
@@ -246,7 +272,8 @@ const LabTestAndHealthCheckUpScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
       <StatusBar backgroundColor="rgba(0,0,0,0)" />
-      {/* <FlatList
+     <ScrollView>
+        {/* <FlatList
         data={users}
         // keyExtractor={(item) => `${item.id}`}
         keyExtractor={item => item.id}
@@ -261,15 +288,17 @@ const LabTestAndHealthCheckUpScreen = ({ navigation }) => {
             {divider()}
             {titleInfo({ title: "Address" })}
             {addressInfo()}
-            {mapInfo()}
+            {/* {mapInfo()} */}
             {titleInfo({ title: "Description" })}
             {facilityInfo()}
+            {healthBanner()}
           {/* </>
         }
      
       /> */}
       
       {/* <Text style={{alignItems:'center', justifyContent:'center'}}>{users.labAddress} Hello</Text> */}
+     </ScrollView>
       {massageAndCallNowButton()}
     </SafeAreaView>
   );
@@ -304,8 +333,15 @@ const styles = StyleSheet.create({
     borderRadius: Sizes.fixPadding + 5.0,
     marginTop: 5,
     overflow: "hidden",
-    elevation: 3.0,
+    // elevation: 3.0,
     marginHorizontal: Sizes.fixPadding * 2.0,
+    // height: Dimensions.get("window").height,
+  },
+  map: {
+    width: Dimensions.get('window').width,
+    // height: Dimensions.get('window').height,
+    height: 270.0,
+    // flex:1
   },
   facilitiesContainerStyle: {
     flexDirection: "row",

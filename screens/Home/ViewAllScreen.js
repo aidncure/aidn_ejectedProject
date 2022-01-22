@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import {
   Text,
   View,
@@ -13,6 +13,7 @@ import { Fonts, Colors, Sizes } from "../../constant/styles";
 import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import {firebase, auth, db, firestore} from '../../firebase';
 
 const ViewAllScreen = ({ navigation }) => {
   function header() {
@@ -45,7 +46,26 @@ const ViewAllScreen = ({ navigation }) => {
     );
   }
 
-  const specialistsList = [
+   const [specialistsList, setSpecialistsList] = useState([]);
+    useEffect(() => {
+      const userData = firebase.auth().currentUser;
+      // db.collection('specialistsList').onSnapshot((querySnapshot)=>{
+      db.collection('specialities').onSnapshot((querySnapshot)=>{
+        const specialistsList = [];
+        querySnapshot.docs.forEach((doc)=>{
+          const {name, id,image} = doc.data();
+          specialistsList.push({
+            id:doc.id,
+            name,
+            image,
+          });
+        });
+        setSpecialistsList(specialistsList);
+      });
+    },[]);
+    console.log(specialistsList);
+
+  const specialistsLists = [
     {
      id: "1",
       name: "Fever",
@@ -137,7 +157,7 @@ const ViewAllScreen = ({ navigation }) => {
       >
         <View style={styles.specialistStyle}>
           <Image
-            source={item.image}
+            source={{uri:item.image}}
             resizeMode="contain"
             style={{ height: 80.0, width: 80.0 }}
           />
@@ -200,7 +220,7 @@ const styles = StyleSheet.create({
     // backgroundColor: "white",
     // borderColor: Colors.lightGray,
     // borderWidth: 1.0,
-    marginHorizontal: 45,
+    // marginHorizontal: 45,
     // marginVertical: Sizes.fixPadding,
     // borderRadius: Sizes.fixPadding,
     // shadowColor: "black",
