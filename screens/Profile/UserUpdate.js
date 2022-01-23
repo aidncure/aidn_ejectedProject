@@ -166,8 +166,7 @@ const UserDataEdit = ({navigation}) => {
       onPress={()=>{Keyboard.dismiss();}}
       >
       <View style={styles.emailContainer}>
-          <TextInput  
-          maxLength={60}      
+          <TextInput        
             placeholderTextColor= {Colors.primary}
             // placeholderTextColor= "#fff" 
             placeholder='Where are you from?'

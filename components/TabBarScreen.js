@@ -122,7 +122,6 @@ const { width } = Dimensions.get('screen');
 
 export default TabBarScreen = () => {
 
-
     useEffect(() => {
       const userData = firebase.auth().currentUser;
       db.collection('Appointments Booked'+ userData.uid).onSnapshot((querySnapshot)=>{

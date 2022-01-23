@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   Dimensions,
+  Linking,
 } from "react-native";
 import { Fonts, Colors, Sizes } from "../../constant/styles";
 import MapView, { Marker } from "react-native-maps";
@@ -178,14 +179,14 @@ const LabTestAndHealthCheckUpScreen = ({ navigation }) => {
   }
     function healthBanner() {
     return (
-      <TouchableOpacity onPress={() => navigation.navigate("ShowMore")}>
+      <TouchableOpacity onPress={()=> Linking.openURL('https://forms.gle/sc6VXstoN3TsddoT7')}>
       <View style={{ alignItems:'center', justifyContent:'center', width:'100%'}}>
       <Image
-        source={require("../../assets/specialistImg/healthCoverageAidn.png")}
+        source={require("../../assets/specialistImg/coverage.jpg")}
         style={{
           height: 400,
           // marginTop:2,
-          marginBottom:20,
+          marginBottom:78,
         //   width:'100%',
         width:"95%",
           // marginHorizontal: Sizes.fixPadding * 2.0,
@@ -235,7 +236,8 @@ const LabTestAndHealthCheckUpScreen = ({ navigation }) => {
       >
         <TouchableOpacity
           activeOpacity={0.9}
-          onPress={() => navigation.goBack()}
+          // onPress={() => navigation.goBack()}
+          onPress={()=> Linking.openURL('whatsapp://send?text=hello&phone=+916364272803')}
           style={{
             flex: 0.5,
             borderColor: Colors.lightGray,
@@ -252,7 +254,8 @@ const LabTestAndHealthCheckUpScreen = ({ navigation }) => {
         </TouchableOpacity>
         <TouchableOpacity
           activeOpacity={0.9}
-          onPress={() => navigation.goBack()}
+          // onPress={() => navigation.goBack()}
+          onPress={() => { Linking.openURL(`tel:01204767359`) }}
           style={{
             flex: 0.5,
             alignItems: "center",

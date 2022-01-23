@@ -92,13 +92,37 @@ const ShowMoreScreen = ({ navigation }) => {
       <TouchableOpacity onPress={() => navigation.navigate("ViewAll")}>
        <View style={{ alignItems:'center', justifyContent:'center', backgroundColor:"#fff"}}>
         <Image
+        // source={require("../../assets/frequentMigranes.png")}
+        source={require("../../assets/specialistImg/chest_pain.jpeg")}
+        resizeMode="contain"
+        style={{
+          height: 200,
+          // width:'100%', 
+          width:'95%', 
+          borderWidth:1,
+          // marginRight:30      
+        }}
+        // borderRadius={30}
+      ></Image>
+     </View>
+     </TouchableOpacity>
+    );
+  }
+  function migranes() {
+    return (
+      <TouchableOpacity onPress={() => navigation.navigate("ViewAll")}>
+       <View style={{ alignItems:'center', justifyContent:'center', backgroundColor:"#fff"}}>
+        <Image
+        // source={require("../../assets/frequentMigranes.png")}
         source={require("../../assets/frequentMigranes.png")}
         resizeMode="contain"
         style={{
           height: 200,
-          width:'90%',       
+          width:'95%', 
+          borderWidth:1,
+          marginBottom:20      
         }}
-        borderRadius={30}
+        // borderRadius={30}
       ></Image>
      </View>
      </TouchableOpacity>
@@ -110,7 +134,8 @@ const ShowMoreScreen = ({ navigation }) => {
       onPress={ ()=> Linking.openURL('https://forms.gle/sc6VXstoN3TsddoT7') }>
       <View style={{ alignItems:'center', justifyContent:'center', width:'100%'}}>
       <Image
-        source={require("../../assets/specialistImg/healthCoverageAidn.png")}
+        // source={require("../../assets/specialistImg/healthCoverageAidn.png")}
+        source={require("../../assets/specialistImg/coverage.jpg")}
         style={{
           height: 400,
           // marginTop:2,
@@ -119,12 +144,33 @@ const ShowMoreScreen = ({ navigation }) => {
         width:"95%",
           // marginHorizontal: Sizes.fixPadding * 2.0,
         }}
-        borderRadius={5}
+        borderRadius={10}
       ></Image>
       </View>
       </TouchableOpacity>
     );
   }
+  //   function healthBanner() {
+  //   return (
+  //     <TouchableOpacity 
+  //     onPress={ ()=> Linking.openURL('https://forms.gle/sc6VXstoN3TsddoT7') }>
+  //     <View style={{ alignItems:'center', justifyContent:'center', width:'100%'}}>
+  //     <Image
+  //       source={require("../../assets")}
+  //       style={{
+  //         height: 400,
+  //         // marginTop:2,
+  //         marginBottom:20,
+  //       //   width:'100%',
+  //       width:"95%",
+  //         // marginHorizontal: Sizes.fixPadding * 2.0,
+  //       }}
+  //       borderRadius={10}
+  //     ></Image>
+  //     </View>
+  //     </TouchableOpacity>
+  //   );
+  // }
 //    function coughBanner() {
 //     return (
 //        <View style={{ alignItems:'center', justifyContent:'center'}}>
@@ -182,7 +228,7 @@ const ShowMoreScreen = ({ navigation }) => {
           <Image
             source={{uri:item.image}}
             resizeMode="contain"
-            style={{ height: 128, width: "100%", borderRadius:30}}
+            style={{ height: 128, width: "100%", borderRadius:10}}
           />
         </View>
       </TouchableHighlight>
@@ -215,6 +261,7 @@ const ShowMoreScreen = ({ navigation }) => {
       {header()}
       {aidnCureBanner()}
       {specialities()}
+      {migranes()}
       {/* {aidnCureBanner()} */}
       {healthBanner()}
      </ScrollView>

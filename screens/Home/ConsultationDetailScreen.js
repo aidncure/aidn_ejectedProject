@@ -79,7 +79,7 @@ const ConsultaionScreen = ({ navigation }) => {
     const saveTimeSlot = async () => {
       const userInfo = firebase.auth().currentUser;
       // const docType = db.collection('specialistsList').name
-      await db.collection('Appointments Booked').doc('Active appointments'+ userInfo.uid).set({
+      await db.collection('Appointed Doctor' + docuid).add({
       // nonOnlineBookings:booking.nonOnlineBookings,
       uid:userInfo.uid,
       key:Math.random(),
@@ -115,7 +115,7 @@ const ConsultaionScreen = ({ navigation }) => {
       ext:ext
     })
     // .then(()=>setSelectedSlot(`${item} ${time}`))
-    // console.log(listofdoctors)
+    console.log(saveAppDetails)
   } 
 
   //  const [selectedSlot, setSelectedSlot] = React.useState("");
@@ -463,12 +463,18 @@ const ConsultaionScreen = ({ navigation }) => {
         onPress={saveTimeSlot}
         onPress={saveAppDetails}
       >
+     <TouchableWithoutFeedback
+     onPress={saveTimeSlot}
+     >
+
         <View style={styles.confirmButtonStyle}
-        onPress={saveAppDetails}
+        // onPress={saveAppDetails}
         >
           <Text style={{ ...Fonts.white20Regular, color:'#000' }}
           >Add payment</Text>
         </View>
+
+     </TouchableWithoutFeedback>
         {/* <CardFormScreen/> */}
         {/* <StripeProvider publishableKey="pk_test_51K84PtSGPMJ99FNgX57aaoX5J5UACm4MVzTxzs46ldk9LP9sbnEX6prObXtDcPf9baInJKUMj5uYBEUwERbwo82b00oolvcUS9">
           <StripePay/>
