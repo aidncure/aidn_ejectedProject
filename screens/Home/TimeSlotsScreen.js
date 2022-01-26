@@ -60,6 +60,7 @@ const TimeSlotScreen = ({ navigation }) => {
   const price = navigation.getParam("price")
   const docuid = navigation.getParam("uid")
   const ext = navigation.getParam("ext")
+  const patientname = navigation.getParam("patientname")
 
   const [selectedSlot, setSelectedSlot] = React.useState("");
 
@@ -91,7 +92,8 @@ const TimeSlotScreen = ({ navigation }) => {
       type:type,
       email:userData.email,
       docuid:docuid,
-      ext:ext,
+      extno:ext,
+      // patient_name:patientname,
     })
     // .then(()=>setSelectedSlot(`${item} ${time}`))
   } 
@@ -110,11 +112,24 @@ const TimeSlotScreen = ({ navigation }) => {
       UserAppointmentBookingId: userData.uid + '#'+ 'AIND' + '@*%' + Math.random().toString(36).slice(2),
       type:type,
       email:userData.email,
-      ext:ext,
-      // docuid:doctorUID,
-    }).then(() => navigation.navigate("Consultation"))
+      extno:ext,
+      // patient_name:patientname,
+    }).then(() => navigation.navigate("Consultation",
+    {
+      image
+    }
+    ))
   }
 
+  const notifi = () => {
+     PushNotification.localNotification(
+      {
+        channelId:'login-channel',
+        channelName:'Login Successful',
+        message:'Welcome back we missed you'
+      }
+    )
+  };
 
   function doctorInfo() {
     return (
@@ -295,6 +310,9 @@ const TimeSlotScreen = ({ navigation }) => {
 
   function bookingInfo() {
     return book ? (
+      // <TouchableWithoutFeedback
+      // onPress={forDoctors}
+      // >
       <View style={styles.bookNowContainerStyle}>
       <TouchableWithoutFeedback
       onPress={handleUsersTime}
@@ -312,6 +330,7 @@ const TimeSlotScreen = ({ navigation }) => {
               price,
               docuid,
               ext,
+              // patientname,
             })
           }
         >
@@ -321,6 +340,7 @@ const TimeSlotScreen = ({ navigation }) => {
         </TouchableOpacity>
       </TouchableWithoutFeedback>
       </View>
+      // </TouchableWithoutFeedback>
     ) : null;
   }
 

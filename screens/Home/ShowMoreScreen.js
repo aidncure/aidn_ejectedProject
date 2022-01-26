@@ -89,11 +89,12 @@ const ShowMoreScreen = ({ navigation }) => {
 
   function aidnCureBanner() {
     return (
-      <TouchableOpacity onPress={() => navigation.navigate("ViewAll")}>
+      <TouchableOpacity onPress={ ()=> Linking.openURL('https://forms.gle/pXqgFRceVe2AuUjG9') }>
        <View style={{ alignItems:'center', justifyContent:'center', backgroundColor:"#fff"}}>
         <Image
         // source={require("../../assets/frequentMigranes.png")}
-        source={require("../../assets/specialistImg/chest_pain.jpeg")}
+        // source={require("../../assets/specialistImg/chest_pain.jpeg")}
+        source={require("../../assets/images/Standard_Insurance.png")}
         resizeMode="contain"
         style={{
           height: 200,
@@ -110,11 +111,12 @@ const ShowMoreScreen = ({ navigation }) => {
   }
   function migranes() {
     return (
-      <TouchableOpacity onPress={() => navigation.navigate("ViewAll")}>
+      // <TouchableOpacity onPress={() => navigation.navigate("ViewAll")}>
+      <TouchableOpacity onPress={ ()=> Linking.openURL('https://forms.gle/pXqgFRceVe2AuUjG9') }>
        <View style={{ alignItems:'center', justifyContent:'center', backgroundColor:"#fff"}}>
         <Image
         // source={require("../../assets/frequentMigranes.png")}
-        source={require("../../assets/frequentMigranes.png")}
+        source={require("../../assets/images/premiumInsurance.png")}
         resizeMode="contain"
         style={{
           height: 200,

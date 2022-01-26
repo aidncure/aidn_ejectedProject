@@ -23,6 +23,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import com.razorpay.rn.RazorpayPackage;
 
+import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 
 
 public class MainApplication extends Application implements ReactApplication {

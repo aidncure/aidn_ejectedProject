@@ -124,10 +124,11 @@ export default TabBarScreen = () => {
 
     useEffect(() => {
       const userData = firebase.auth().currentUser;
-      db.collection('Appointments Booked'+ userData.uid).onSnapshot((querySnapshot)=>{
+    //   db.collection('Appointments Booked'+ userData.uid).onSnapshot((querySnapshot)=>{
+      db.collection('Appointments Booked').where('uid','==', userData.uid).onSnapshot((querySnapshot)=>{
         const activeDataList = [];
         querySnapshot.docs.forEach((doc)=>{
-          const {date,User_Booking_Date, Doctor_name,timeSelected,time,type,ext} = doc.data();
+          const {date,User_Booking_Date, Doctor_name,timeSelected,time,type,extno} = doc.data();
           activeDataList.push({
             id:userData.uid + 'AIDN' + '#' +"D#N@812#A" + Math.random().toString(36).slice(2),
             timeSelected,
@@ -135,7 +136,7 @@ export default TabBarScreen = () => {
             User_Booking_Date,
             Doctor_name,
             type: type,
-            ext,
+            extno,
           });
         });
         setActiveDataList(activeDataList);
@@ -246,7 +247,7 @@ export default TabBarScreen = () => {
                             <Text style={{ ...Fonts.black18Bold }}>{item.time}</Text>
                             <Text style={{ marginVertical: 8.0, ...Fonts.black16Regular }}>{item.Doctor_name}</Text>
                             <Text style={{ ...Fonts.primaryColorRegular }}>{item.type}</Text>
-                            <Text style={{ ...Fonts.black16Bold }}>Ext.({item.ext})</Text>
+                            <Text style={{ ...Fonts.black16Bold }}>Ext.({item.extno})</Text>
                         </View>
                     </View>
                 </View>

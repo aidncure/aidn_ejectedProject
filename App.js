@@ -28,6 +28,7 @@ import HomeScreen from "./screens/Home/HomeScreen";
 import ShowMoreScreen from "./screens/Home/ShowMoreScreen"
 import UsersProfileScreen from './screens/Profile/userProfileScreen'
 import QrScreen from './screens/Profile/QrScreen'
+import TabBarScreen from './components/TabBarScreen'
 import { database } from "./firebase";
 import stripe from 'tipsi-stripe';
 
@@ -75,6 +76,7 @@ const navigator = createAppContainer(
         ShowMore : ShowMoreScreen,
         UserProfile : UsersProfileScreen,
         DefaultProfile : QrScreen,
+        Appoint : TabBarScreen,
       }),
     },
     {

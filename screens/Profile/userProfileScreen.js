@@ -39,7 +39,7 @@ const UsersProfileScreen = ({ navigation }) => {
 
     useEffect(() => {
       const userData = firebase.auth().currentUser;
-      db.collection('users' + userData.uid).onSnapshot((querySnapshot)=>{
+      db.collection('usersProfile').where('uid','==', userData.uid).onSnapshot((querySnapshot)=>{
         const users = [];
         querySnapshot.docs.forEach((doc)=>{
           const {name,gender,age,occupation,from, email,blood,emergency,phone} = doc.data();

@@ -26,6 +26,7 @@ const SpecialistScreen = ({ navigation }) => {
   const name = navigation.getParam("name");
   const data = navigation.getParam(saveUsers);
   const dataOnline = navigation.getParam(saveOnlineUsers);
+  // const patientname = navigation.getParam("patientname");
 
 
 
@@ -48,8 +49,8 @@ const SpecialistScreen = ({ navigation }) => {
       uid:userData.uid,
       key:Math.random(),
       date: new Date().toUTCString(),
-      name:docType.name,
-      // name,
+      // name:docType.name,
+      // patient_name : patientname
       // id:key      
     }).then(() => navigation.navigate("TimeSlots"))
   } 
@@ -60,9 +61,28 @@ const SpecialistScreen = ({ navigation }) => {
     uid:userData.uid,
     key:Math.random(),
     date: new Date().toUTCString(),    
-    // name:docType.name,
+    // patient_name : patientname
     })
   }
+
+  const [patientName, setpatientName] = useState([]);
+    useEffect(() => {
+      const userData = firebase.auth().currentUser;
+      db.collection('users' + userData.uid).onSnapshot((querySnapshot)=>{
+        const patientName = [];
+        querySnapshot.docs.forEach((doc)=>{
+          const {name,email,phone} = doc.data();
+          patientName.push({
+            id:userData.uid,
+            name,
+            email: userData.email,
+            phone,
+          });
+        });
+        setpatientName(patientName);
+      });
+    },[]);
+    console.log(patientName);
 
 
   const [users, setUsers] = useState([]);
@@ -181,15 +201,15 @@ const SpecialistScreen = ({ navigation }) => {
 
   function search() {
     return (
-      <View style={styles.headerSearchStyle}>
-        <Ionicons name="search" size={24} color="gray" />
-        <View style={{ flex: 1 }}>
-          <TextInput
-            placeholder={`Search ${type}`}
-            style={{ ...Fonts.gray17Regular, marginLeft: Sizes.fixPadding }}
-          />
-        </View>
+    <View style={styles.headerSearchStyle}>
+      <Ionicons name="search" size={20} color={Colors.primary} />
+      <View style={{ flex: 1 }}>
+      <TextInput
+        placeholder="Search Specialities"
+        style={{ ...Fonts.gray8Regular, marginLeft: Sizes.fixPadding }}
+      />
       </View>
+    </View>
     );
   }
 
@@ -283,6 +303,7 @@ const SpecialistScreen = ({ navigation }) => {
                   rating: item.rating,
                   price:item.price,
                   ext:item.ext,
+                  patientname : patientName.name,
                 })
               }
               >
@@ -312,7 +333,7 @@ const SpecialistScreen = ({ navigation }) => {
                   description:item.description,
                   price:item.price,
                   ext:item.ext,
-
+                  patientname : patientName.name,
                 })
               }
               >
@@ -361,17 +382,27 @@ const SpecialistScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   headerSearchStyle: {
+    // flexDirection: "row",
+    // backgroundColor: "white",
+    // borderRadius: Sizes.fixPadding,
+    // borderColor: "#E0E0E0",
+    // borderWidth: 1,
+    // paddingHorizontal: Sizes.fixPadding * 2.0,
+    // alignItems: "center",
+    // paddingVertical: Sizes.fixPadding,
+    // marginHorizontal: Sizes.fixPadding * 2.0,
+    // marginTop: Sizes.fixPadding,
+    // marginBottom: Sizes.fixPadding,
     flexDirection: "row",
     backgroundColor: "white",
     borderRadius: Sizes.fixPadding,
-    borderColor: "#E0E0E0",
-    borderWidth: 1,
-    paddingHorizontal: Sizes.fixPadding * 2.0,
+    borderBottomColor: "#eee",
+    borderBottomWidth: 1,
+    paddingHorizontal: Sizes.fixPadding,
     alignItems: "center",
-    paddingVertical: Sizes.fixPadding,
-    marginHorizontal: Sizes.fixPadding * 2.0,
-    marginTop: Sizes.fixPadding,
-    marginBottom: Sizes.fixPadding,
+    marginHorizontal: Sizes.fixPadding * 1,
+    marginTop:10,
+    marginBottom:8
   },
   headerContainerStyle: {
     backgroundColor: "white",

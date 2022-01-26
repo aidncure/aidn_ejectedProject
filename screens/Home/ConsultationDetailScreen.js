@@ -23,7 +23,7 @@ import RazorpayCheckout from 'react-native-razorpay';
 import axios from "axios";
 import StripePay from "../../stripePay";
 import { StripeProvider } from "@stripe/stripe-react-native";
-// import crypto from "crypto"
+import PushNotification from "react-native-push-notification";
 
 // stripe.setOptions({
 //   publishableKey:'pk_test_51K84PtSGPMJ99FNgX57aaoX5J5UACm4MVzTxzs46ldk9LP9sbnEX6prObXtDcPf9baInJKUMj5uYBEUwERbwo82b00oolvcUS9',
@@ -47,17 +47,25 @@ const ConsultaionScreen = ({ navigation }) => {
   const price = navigation.getParam("price")
   const docuid = navigation.getParam("docuid")
   const ext = navigation.getParam("ext")
+  const patient_name = navigation.getParam("patientname")
   // const bookingDates = navigation.getParam("datesBlacklist")
 
   //  const userData = firebase.auth().currentUser; 
 //https://www.npmjs.com/package/razorpay
+
+ const [state , setState] = useState({
+        patientname:'',    
+    });
+    const handleChangeText = (name, value) =>{
+        setState({...state, [name]:value})
+    }
 
   const db = firebase.firestore()
 
   const [users, setUsers] = useState([]);
     useEffect(() => {
       const userData = firebase.auth().currentUser;
-      db.collection('users' + userData.uid).onSnapshot((querySnapshot)=>{
+      db.collection('users').where('uid','==', userData.uid).onSnapshot((querySnapshot)=>{
         const users = [];
         querySnapshot.docs.forEach((doc)=>{
           const {name,email,phone} = doc.data();
@@ -76,30 +84,36 @@ const ConsultaionScreen = ({ navigation }) => {
    const [check, setCheck] = useState(false);
    const [cash, setCash] = useState(false);
 
-    const saveTimeSlot = async () => {
-      const userInfo = firebase.auth().currentUser;
-      // const docType = db.collection('specialistsList').name
-      await db.collection('Appointed Doctor' + docuid).add({
-      // nonOnlineBookings:booking.nonOnlineBookings,
-      uid:userInfo.uid,
-      key:Math.random(),
-      date: new Date().toUTCString(),
-      timeSelected : slot + '  /  ' + 'Users choice of time',
-      time : 'Appointment time is '+ ' ' + slot,
-      Doctor_name:name,
-      User_Booking_Date : new Date().toDateString(),
-      id:userInfo.uid + 'AIDN' + '#' +"D#N@812#A" + Math.random().toString(36).slice(2), 
-      type:type,
-      doctor_Type:docType,
-      docuid:docuid,
-      ext:ext
-    })
-    // .then(()=>setSelectedSlot(`${item} ${time}`))
-  } 
+//     const forDoctors = async () => {
+//       const userInfo = firebase.auth().currentUser;
+//       // const docType = db.collection('specialistsList').name
+//       if (state.name === ''){
+//         alert('Please enter the patient name')
+//       }else{
+//       await db.collection('Appointed Doctor' + docuid).add({
+//       // nonOnlineBookings:booking.nonOnlineBookings,
+//       uid:userInfo.uid,
+//       key:Math.random(),
+//       date: new Date().toUTCString(),
+//       timeSelected : slot + '  /  ' + 'Users choice of time',
+//       time : 'Appointment time is '+ ' ' + slot,
+//       Doctor_name:name,
+//       User_Booking_Date : new Date().toDateString(),
+//       id:userInfo.uid + 'AIDN' + '#' +"D#N@812#A" + Math.random().toString(36).slice(2), 
+//       type:type,
+//       doctor_Type:docType,
+//       docuid:docuid,
+//       // ext:ext,
+//       // patient_name:state.patientname,
+//       })
+//     console.log(forDoctors)
+//   } 
+// }
     const saveAppDetails = async () => {
       const userInfo = firebase.auth().currentUser;
       // const listofdoctors = db.collection('doctors')
-      await db.collection('Appointments Booked'+ userInfo.uid).add({
+      await db.collection('Appointments Booked').doc('Active appointements' + userInfo.uid).set({
+      // await db.collection('Appointments Booked'+ userInfo.uid).add({
       // nonOnlineBookings:booking.nonOnlineBookings,
       uid:userInfo.uid,
       key:Math.random(),
@@ -112,13 +126,28 @@ const ConsultaionScreen = ({ navigation }) => {
       type:type,
       doctor_Type:docType,
       docuid:docuid,
-      ext:ext
-    })
-    // .then(()=>setSelectedSlot(`${item} ${time}`))
+      extno:ext,
+      patient_name:state.patientname,
+
+    }).then(
+      PushNotification.localNotification(
+      {
+        channelId:'login-channel',
+        channelName:'Login Successful',
+        message:'Welcome back we missed you'
+      }
+    )
+    )
     console.log(saveAppDetails)
   } 
 
-  //  const [selectedSlot, setSelectedSlot] = React.useState("");
+  const handleNotifications = () => {
+    PushNotification.localNotification({
+      channelId:'login-channel',
+      title:'Your appointment is successfully',
+      message:"Appointment booked with" + name,
+    })
+  }
 
 
    const [orderId, setOrderId] = useState();
@@ -214,10 +243,28 @@ const ConsultaionScreen = ({ navigation }) => {
   const key_secret = "SqAik4NHHQcY61GF0VRfcIkI";
   RazorpayCheckout.open(options).then((data) => {
     // handle success
+    
     navigation.navigate('Home')
     const successId = (`Success: ${data.razorpay_payment_id}`);
 
     // if(data===data)
+
+    // db.collection('Appointed Doctor' + docuid).add({
+    //   // nonOnlineBookings:booking.nonOnlineBookings,
+    //   uid:userInfo.uid,
+    //   key:Math.random(),
+    //   date: new Date().toUTCString(),
+    //   timeSelected : slot + '  /  ' + 'Users choice of time',
+    //   time : 'Appointment time is '+ ' ' + slot,
+    //   Doctor_name:name,
+    //   User_Booking_Date : new Date().toDateString(),
+    //   id:userInfo.uid + 'AIDN' + '#' +"D#N@812#A" + Math.random().toString(36).slice(2), 
+    //   type:type,
+    //   doctor_Type:docType,
+    //   docuid:docuid,
+    //   ext:ext,
+    //   patient_name:users,
+    // })
 
     const userData = firebase.auth().currentUser;
     //   db.collection('users').doc('Appointments Booked' + userData.uid).update({
@@ -248,7 +295,7 @@ const ConsultaionScreen = ({ navigation }) => {
       >
         <View style={styles.doctorImageContainerStyle}>
           <Image
-            source={image}
+            source={{uri:image}}
             resizeMode="contain"
             style={{
               height: 90.0,
@@ -360,24 +407,35 @@ const ConsultaionScreen = ({ navigation }) => {
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <View style={styles.patientImageContainer}>
             {item.image === null ? (
-              <Ionicons name="person" size={24} color="gray" />
+               <Image
+                source={require('../../assets/imagesvtr/buddy-97.png')}
+                resizeMode="contain"
+                style={{ height: 60, width: 60, borderRadius: 40.0 }}
+              />
             ) : (
               <Image
-                source={item.image}
+                source={require('../../assets/imagesvtr/buddy-97.png')}
                 resizeMode="contain"
-                style={{ height: 60.0, width: 60.0, borderRadius: 40.0 }}
+                style={{ height: 60, width: 60, borderRadius: 40.0 }}
               />
             )}
           </View>
-          <Text
+          <TextInput
             style={{
               ...Fonts.black16Regular,
               marginLeft: Sizes.fixPadding,
               marginBottom: Sizes.fixPadding,
+              width:'50%',
+              height:40,
+              borderBottomWidth:1,
+              borderColor:Colors.dodgerBlue
             }}
+            placeholder="Patient name"
+            // value = {patientname}
+            onChangeText={(value) => handleChangeText('patientname', value)}
           >
-            {item.name}
-          </Text>
+            
+          </TextInput>
         </View>
       );
     };
@@ -460,15 +518,13 @@ const ConsultaionScreen = ({ navigation }) => {
         onPress={paymentHandler}
       >
       <TouchableWithoutFeedback
-        onPress={saveTimeSlot}
-        onPress={saveAppDetails}
+     onPress={handleNotifications}
       >
      <TouchableWithoutFeedback
-     onPress={saveTimeSlot}
+     onPress={saveAppDetails}
      >
 
         <View style={styles.confirmButtonStyle}
-        // onPress={saveAppDetails}
         >
           <Text style={{ ...Fonts.white20Regular, color:'#000' }}
           >Add payment</Text>
@@ -634,7 +690,7 @@ function paymentModeStripe() {
       {/* {divider()} */}
       {appintmentText()}
       {patients()}
-      {addPatient()}
+      {/* {addPatient()} */}
       {/* {paymentModeStripe()} */}
       {/* {paymentModeCash()} */}
       {confirmPayButton()}
@@ -691,7 +747,7 @@ const styles = StyleSheet.create({
     height: 60.0,
     width: 60.0,
     borderRadius: 40.0,
-    backgroundColor: "#eee",
+    // backgroundColor: "#eee",
     borderColor: '#eee',
     borderWidth: 1.0,
     marginRight: Sizes.fixPadding,
@@ -701,7 +757,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 0 }, // change this for more shadow
     shadowOpacity: 0.5,
     shadowRadius: Sizes.fixPadding,
-    elevation: 2.0,
+    // elevation: 2.0,
     overflow: "hidden",
   },
   confirmButtonStyle: {

@@ -14,15 +14,18 @@ import {
   Keyboard,
   ScrollView,
   Linking,
+  TouchableWithoutFeedback
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Fonts, Colors, Sizes } from "../../constant/styles";
 import RBSheet from "react-native-raw-bottom-sheet";
 import {firebase, auth, db, firestore} from '../../firebase';
+// import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 const { width } = Dimensions.get("window");
 
 const HomeScreen = ({ navigation }) => {
+  const patientname = navigation.getParam("username");
 
 
    const handleLogout = () => {
@@ -234,7 +237,8 @@ const HomeScreen = ({ navigation }) => {
   }
   function basicInsurance() {
     return (
-      <TouchableOpacity onPress={ ()=> Linking.openURL('https://forms.gle/pXqgFRceVe2AuUjG9') }>
+      // <TouchableOpacity onPress={ ()=> Linking.openURL('https://forms.gle/pXqgFRceVe2AuUjG9') }>
+      <TouchableWithoutFeedback onPress={() => navigation.navigate("ShowMore")}>
       <View style={{ alignItems:'center', justifyContent:'center', width:'100%'}}>
       <Image
         source={require("../../assets/images/Basic_Insurance.png")}
@@ -251,15 +255,17 @@ const HomeScreen = ({ navigation }) => {
         borderRadius={5}
       ></Image>
       </View>
-      </TouchableOpacity>
+      </TouchableWithoutFeedback>
     );
   }
   function standardInsurance() {
     return (
-      <TouchableOpacity onPress={ ()=> Linking.openURL('https://forms.gle/pXqgFRceVe2AuUjG9') }>
+      <TouchableWithoutFeedback onPress={() => navigation.navigate("ViewAll")}>
+      {/* <TouchableWithoutFeedback onPress={ ()=> Linking.openURL('https://forms.gle/pXqgFRceVe2AuUjG9') }> */}
       <View style={{ alignItems:'center', justifyContent:'center', width:'100%'}}>
       <Image
-        source={require("../../assets/images/Standard_Insurance.png")}
+        // source={require("../../assets/images/Standard_Insurance.png")}
+        source={require("../../assets/specialistImg/chest_pain.jpeg")}
         style={{
           height: 202,
           marginTop:2,
@@ -270,15 +276,16 @@ const HomeScreen = ({ navigation }) => {
         borderRadius={5}
       ></Image>
       </View>
-      </TouchableOpacity>
+      </TouchableWithoutFeedback>
     );
   }
   function premiumInsurance() {
     return (
-      <TouchableOpacity onPress={ ()=> Linking.openURL('https://forms.gle/pXqgFRceVe2AuUjG9') }>
+      <TouchableWithoutFeedback onPress={() => navigation.navigate("ViewAll")}>
       <View style={{ alignItems:'center', justifyContent:'center', width:'100%'}}>
        <Image
-        source={require("../../assets/images/premiumInsurance.png")}
+        // source={require("../../assets/images/premiumInsurance.png")}
+        source={require("../../assets/frequentMigranes.png")}
         style={{
           height: 202,
           marginTop:2,
@@ -289,7 +296,7 @@ const HomeScreen = ({ navigation }) => {
         borderRadius={5}
       ></Image>
       </View>
-      </TouchableOpacity>
+      </TouchableWithoutFeedback>
     );
   }
 
@@ -313,7 +320,7 @@ const HomeScreen = ({ navigation }) => {
       <TouchableHighlight
         underlayColor="white"
         activeOpacity={0.9}
-        onPress={() => navigation.navigate("Specialist", { name: item.name })}
+        onPress={() => navigation.navigate("Specialist", { name: item.name})}
       >
         <View style={styles.specialistInfoContainer}>
           <Image
@@ -560,7 +567,7 @@ const HomeScreen = ({ navigation }) => {
   }
    function aidnCureBanner() {
     return (
-      <TouchableOpacity onPress={() => navigation.navigate("ShowMore")}>
+      <TouchableWithoutFeedback onPress={() => navigation.navigate("ShowMore")}>
        <View style={{ alignItems:'center', justifyContent:'center'}}
         onPress={() => navigation.navigate("ShowMore")}
        >
@@ -577,12 +584,12 @@ const HomeScreen = ({ navigation }) => {
         borderRadius={5}
       ></Image>
      </View>
-     </TouchableOpacity>
+     </TouchableWithoutFeedback>
     );
   }
    function coughBanner() {
     return (
-      <TouchableOpacity onPress={() => navigation.navigate("ShowMore")}>
+      <TouchableWithoutFeedback onPress={() => navigation.navigate("ShowMore")}>
        <View style={{ alignItems:'center', justifyContent:'center'}}
         onPress={() => navigation.navigate("ShowMore")}
        >
@@ -628,7 +635,7 @@ const HomeScreen = ({ navigation }) => {
         onPress={() => navigation.navigate("ShowMore")}
       ></Image>
      </View>
-     </TouchableOpacity>
+     </TouchableWithoutFeedback>
     );
   }
 
@@ -768,9 +775,9 @@ const HomeScreen = ({ navigation }) => {
       {title({ title: "Find doctor by speciality" })}
       {specialists()}
       {viewAll()}
-      {basicInsurance()}
       {standardInsurance()}
       {premiumInsurance()}
+      {basicInsurance()}
       {pharma()}
       {pharmacyBanner()}
       {pharmasList()}

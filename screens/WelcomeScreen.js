@@ -25,6 +25,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import RegisterScreen from "./RegisterScreen";
 import { color } from "react-native-reanimated";
 import { auth } from "../firebase";
+import PushNotification from "react-native-push-notification";
 // import {auth} from "../database/config"
 // import * as firebase from 'firebase';
 
@@ -46,6 +47,7 @@ const WelcomeScreen = ({ navigation }) => {
     }
   })
   return unsubscribe
+  
   }, [])
 
   const handleRegister = () => {
@@ -54,10 +56,29 @@ const WelcomeScreen = ({ navigation }) => {
   .then(userCredentials => {
     const user = userCredentials.user;
     console.log(user.Email);
-    // navigation.navigate('BottomTabScreen')
   })
   .catch(error => alert(error.message))
 }
+
+useEffect(()=>{
+const createChannels = () =>{
+  PushNotification.createChannel(
+    {
+      channelId:'login-channel',
+      channelName:'Login Channel'
+    }
+  )
+}
+},[])
+
+// const createChannels = () =>{
+//   PushNotification.createChannel(
+//     {
+//       channelId:'login-channel',
+//       channelName:'Login Channel'
+//     }
+//   )
+// }
 
 const handleLogin = async() =>{
   await fetch('https://aidn.in/api/login',{

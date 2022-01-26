@@ -56,7 +56,7 @@ const UserDataEdit = ({navigation}) => {
         if (state.name === ''){
             alert('Please fill the details')
         }else{
-           await db.collection('users' + userData.uid).add({
+           await db.collection('usersProfile').doc('user'+ userData.uid).set({
                 name : state.name,
                 gender: state.gender,
                 age: state.age,
@@ -68,7 +68,9 @@ const UserDataEdit = ({navigation}) => {
                 uid:userData.uid,
             })
             // alert("Saved")
-            navigation.navigate('Home')
+            navigation.navigate('Home',{
+              username : state.name
+            })
             navigation.navigate('BottomTabScreen')
 
         }
