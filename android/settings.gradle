@@ -1,8 +1,8 @@
-rootProject.name = 'aidn_Doctor'
+rootProject.name = 'aidn'
 include ':react-native-svg'
-project(':react-native-svg').projectDir = new File(rootProject.projectDir, '../../../Dropbox/PC/Desktop/aidn_Doctor/node_modules/react-native-svg/android')
+project(':react-native-svg').projectDir = new File(rootProject.projectDir, '../../../Dropbox/PC/Desktop/aidn/node_modules/react-native-svg/android')
 include ':react-native-randombytes'
-project(':react-native-randombytes').projectDir = new File(rootProject.projectDir, '../../../Dropbox/PC/Desktop/aidn_Doctor/node_modules/react-native-randombytes/android')
+project(':react-native-randombytes').projectDir = new File(rootProject.projectDir, '../../../Dropbox/PC/Desktop/aidn/node_modules/react-native-randombytes/android')
 
 apply from: new File(["node", "--print", "require.resolve('expo/package.json')"].execute(null, rootDir).text.trim(), "../scripts/autolinking.gradle");
 useExpoModules()

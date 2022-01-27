@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Aidn",
-    "slug": "aidn_Doctor",
+    "slug": "Aidn",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/aidn.png",
@@ -29,7 +29,7 @@
           "apiKey": "AIzaSyBRwDvmBt_Z4ZFVTYytgLsWW9yUSEJngk0"
         }
       },
-      "package": "com.aidn.aidnDoctor"
+      "package": "com.aidn.aidn"
     },
     "web": {
       "favicon": "./assets/aidn.png"

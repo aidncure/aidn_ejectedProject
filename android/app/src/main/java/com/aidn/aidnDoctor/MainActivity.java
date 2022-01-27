@@ -1,4 +1,4 @@
-package com.aidn.aidnDoctor;
+package com.aidn.aidn;
 
 import android.os.Build;
 import android.os.Bundle;

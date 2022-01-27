@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "187677015930",
+    "firebase_url": "https://aidnpro-7c2db-default-rtdb.firebaseio.com",
+    "project_id": "aidnpro-7c2db",
+    "storage_bucket": "aidnpro-7c2db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:187677015930:android:15d4dd2f6bd5a2fc87e0c3",
+        "android_client_info": {
+          "package_name": "com.aidn.aidn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "187677015930-qoe3enj0eobmrgm8pon6o4vdh6vdscpo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAB_Kn6viJYntEfvNeNo9sHFfpqPQ3J9M8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "187677015930-qoe3enj0eobmrgm8pon6o4vdh6vdscpo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:187677015930:android:2dcc80d105a3951987e0c3",
+        "android_client_info": {
+          "package_name": "com.aidn.aidnDoctor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "187677015930-qoe3enj0eobmrgm8pon6o4vdh6vdscpo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAB_Kn6viJYntEfvNeNo9sHFfpqPQ3J9M8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "187677015930-qoe3enj0eobmrgm8pon6o4vdh6vdscpo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
