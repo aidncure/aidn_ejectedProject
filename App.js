@@ -31,10 +31,13 @@ import QrScreen from './screens/Profile/QrScreen'
 import TabBarScreen from './components/TabBarScreen'
 import { database } from "./firebase";
 import stripe from 'tipsi-stripe';
+import OnboardingScreen from './Onboarding';
 
-stripe.setOptions({
-  publishableKey: 'pk_test_51K84PtSGPMJ99FNgX57aaoX5J5UACm4MVzTxzs46ldk9LP9sbnEX6prObXtDcPf9baInJKUMj5uYBEUwERbwo82b00oolvcUS9',
-})
+// Stripe key activate only when required
+
+// stripe.setOptions({
+//   publishableKey: 'pk_test_51K84PtSGPMJ99FNgX57aaoX5J5UACm4MVzTxzs46ldk9LP9sbnEX6prObXtDcPf9baInJKUMj5uYBEUwERbwo82b00oolvcUS9',
+// })
 
 const navigator = createAppContainer(
   createSwitchNavigator(
@@ -42,6 +45,7 @@ const navigator = createAppContainer(
       LoadingScreen: LoadingScreen,
       mainFlow: createStackNavigator({
         Welcome: {
+          Intro: OnboardingScreen,
           screen: WelcomeScreen,
           navigationOptions: {
             headerShown: false,

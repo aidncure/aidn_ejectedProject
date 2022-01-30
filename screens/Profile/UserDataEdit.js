@@ -5,35 +5,10 @@ import { Fonts, Colors, Sizes } from "../../constant/styles";
 import { fetchUser, newUser, } from "../../apiServices";
 // import firebase from '../../firebase';
 import {firebase, auth, db, firestore} from '../../firebase';
-// import { ScrollView } from 'react-native-gesture-handler';
-// import db from '../../firebase';
-   
 
-
-// const userDataUrl = "https://aidnpro-7c2db-default-rtdb.firebaseio.com/newUsers.json"
-// const db = firebase.firestore()
 
 const UserDataEdit = ({navigation}) => {
-    // const [fullName , setFullName] = useState([]);
-    // const [gender , setGender] = useState([]);
-    // const [age , setAge] = useState([]);
-    // const [occupation , setOccupation] = useState([]);
-    // const [from , setFrom] = useState([]);
-    // const [isLoading , setLoading] = useState(true);
-    // const [userData, setUserData] = useState([]);
-    // useEffect(() => {
-    //  fetch(userDataUrl)
-    //  .then((response)=>response.json())
-    //  .then((json) => setUserData(json))
-    //  .catch((error) => console.log(error))
-    //  .finally(() => setLoading(false));
-    // },[]);
 
-    // if (userData !== ''){
-    //   console.log('Not Logged in')
-    // }else{
-    //   console.log('Logged in')
-    // }
 
     const [state , setState] = useState({
         name:'',
