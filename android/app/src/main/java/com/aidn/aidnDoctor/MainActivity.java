@@ -1,4 +1,4 @@
-package com.aidn.aidn;
+package com.aidn.aidnhealth;
 
 import android.os.Build;
 import android.os.Bundle;

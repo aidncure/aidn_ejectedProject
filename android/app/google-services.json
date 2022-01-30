@@ -63,6 +63,35 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:187677015930:android:efa66e04a96b1b1687e0c3",
+        "android_client_info": {
+          "package_name": "com.aidn.aidnhealth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "187677015930-qoe3enj0eobmrgm8pon6o4vdh6vdscpo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAB_Kn6viJYntEfvNeNo9sHFfpqPQ3J9M8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "187677015930-qoe3enj0eobmrgm8pon6o4vdh6vdscpo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"
