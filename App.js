@@ -45,7 +45,6 @@ const navigator = createAppContainer(
       LoadingScreen: LoadingScreen,
       mainFlow: createStackNavigator({
         Welcome: {
-          Intro: OnboardingScreen,
           screen: WelcomeScreen,
           navigationOptions: {
             headerShown: false,

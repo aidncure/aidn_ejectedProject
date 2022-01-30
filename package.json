@@ -82,7 +82,8 @@
     "react-swipe-to-delete-component": "^0.5.5",
     "reanimated-bottom-sheet": "^1.0.0-alpha.22",
     "stripe": "^8.195.0",
-    "tipsi-stripe": "^9.2.0"
+    "tipsi-stripe": "^9.2.0",
+    "yarn": "^1.22.17"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
