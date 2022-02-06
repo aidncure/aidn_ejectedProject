@@ -237,15 +237,15 @@ const HomeScreen = ({ navigation }) => {
   }
   function basicInsurance() {
     return (
-      // <TouchableOpacity onPress={ ()=> Linking.openURL('https://forms.gle/pXqgFRceVe2AuUjG9') }>
-      <TouchableWithoutFeedback onPress={() => navigation.navigate("ShowMore")}>
+      // <TouchableWithoutFeedback onPress={() => navigation.navigate("ShowMore")}>
+      <TouchableWithoutFeedback onPress={() => navigation.navigate("DefaultProfile")}>
       <View style={{ alignItems:'center', justifyContent:'center', width:'100%'}}>
       <Image
-        source={require("../../assets/images/Basic_Insurance.png")}
+        source={require("../../assets/pulseBanner.png")}
         // resizeMode="contain"
         style={{
-          height: 202,
-          marginTop: Sizes.fixPadding + 5.0,
+          height: 220,
+          marginTop: Sizes.fixPadding,
           // paddingBottom:100,
           marginBottom:20,
           // width:370,

@@ -1,0 +1,7 @@
+Pulse change
+Cure price in one page 
+Circle doctor image 
+Add doctor 
+add documents
+Push notifications
+this.firestore.collection('doctors').doc('doctor'+ docuid.uid).update({

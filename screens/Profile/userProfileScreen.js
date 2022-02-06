@@ -61,38 +61,6 @@ const UsersProfileScreen = ({ navigation }) => {
     },[]);
     console.log(users);
 
-    // const user_profile = async() =>{
-//     useEffect(() => {
-//     const users = []
-//     fetch('https://aidn.in/api/login',{
-//         method:'POST',
-//         headers:{
-//         'Accept':'application/json',
-//         'Content-Type':'application/json'
-//         },
-//         // body:JSON.stringify({"email":Email, "password":Password})
-//     }).then(res => res.json())
-//     .then(resData => {
-//         users.push({
-//             // name,
-//             // gender,
-//             // age,
-//             resData
-//         })
-//         setUsers(users)
-//         if((resData.msg === 'successfully login')){
-//         // navigation.navigate('BottomTabScreen')
-//         console.log(resData.name)
-//         setUsers(resData)
-//         // {handleHome}
-//         }else{
-//         Alert.alert(JSON.stringify(resData));
-//         // Alert.alert('Invalid email or password');
-//         }
-//     });
-// },[]);
-// }
-
     function profileData (){
         return(
             <View>
@@ -412,7 +380,7 @@ const UsersProfileScreen = ({ navigation }) => {
            <TouchableWithoutFeedback
            onPress={handleLogout}
            >
-                <TouchableOpacity>
+                {/* <TouchableOpacity> */}
                  <View style={{
                  alignItems:'center',
                  justifyContent:'center',
@@ -421,7 +389,7 @@ const UsersProfileScreen = ({ navigation }) => {
                  marginHorizontal:100,
                  height:40,
                  borderRadius:100,
-                 marginVertical:60
+                 marginVertical:60,
              }}
              onPress={handleLogout}
              >
@@ -432,7 +400,7 @@ const UsersProfileScreen = ({ navigation }) => {
                     // onPress={handleLogout}
                 >Logout</Text>
                 </View>
-            </TouchableOpacity>
+            {/* </TouchableOpacity> */}
            </TouchableWithoutFeedback>
       </SafeAreaView>
     )

@@ -1,5 +1,5 @@
 import React, { Component, useState, useEffect } from 'react';
-import {View, Text, Button, SafeAreaView,StatusBar, StyleSheet,TouchableOpacity,TextInput,Image,Keyboard,TouchableWithoutFeedback,ScrollView} from 'react-native';
+import {View, Text, Button, SafeAreaView,StatusBar,ToastAndroid,StyleSheet,TouchableOpacity,TextInput,Image,Keyboard,TouchableWithoutFeedback,ScrollView} from 'react-native';
 import { Ionicons } from "@expo/vector-icons";
 import { Fonts, Colors, Sizes } from "../../constant/styles";
 import { fetchUser, newUser, } from "../../apiServices";
@@ -29,7 +29,10 @@ const UserDataEdit = ({navigation}) => {
     const db = firebase.firestore()
     const saveUsers = async () => {
         if (state.name === ''){
-            alert('Please fill the details')
+            // alert('Please fill the details')
+            ToastAndroid.show('Please fill the complete details',
+            ToastAndroid.LONG
+          )
         }else{
            await db.collection('usersProfile').doc('user'+ userData.uid).set({
                 name : state.name,

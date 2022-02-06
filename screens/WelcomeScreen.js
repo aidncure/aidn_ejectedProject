@@ -14,6 +14,7 @@ import {
   StyleSheet,
   Keyboard,
   Alert,
+  ToastAndroid,
 } from "react-native";
 // import {FloatingLabelInput} from 'react-native-floating-label-input';
 import {Button} from 'react-native-elements';
@@ -55,9 +56,15 @@ const WelcomeScreen = ({ navigation }) => {
   .signInWithEmailAndPassword(Email, Password)
   .then(userCredentials => {
     const user = userCredentials.user;
-    console.log(user.Email);
+    // console.log(user.Email);
   })
-  .catch(error => alert(error.message))
+  .catch(error => 
+    // alert(error.message)
+    ToastAndroid.show('Entered email/password is wrong',
+    ToastAndroid.LONG
+    )
+  )
+  // .catch(error => alert('Entered email/password is wrong'))
 }
 
 useEffect(()=>{
@@ -70,6 +77,39 @@ const createChannels = () =>{
   )
 }
 },[])
+
+
+function alertModal () {
+  <View style={styles.centeredView}>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert("Modal has been closed.");
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>Hello World!</Text>
+            <Pressable
+              style={[styles.button, styles.buttonClose]}
+              onPress={() => setModalVisible(!modalVisible)}
+            >
+              <Text style={styles.textStyle}>Hide Modal</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+      <Pressable
+        style={[styles.button, styles.buttonOpen]}
+        onPress={() => setModalVisible(true)}
+      >
+        <Text style={styles.textStyle}>Show Modal</Text>
+      </Pressable>
+    </View>
+}
 
 // const createChannels = () =>{
 //   PushNotification.createChannel(
@@ -288,9 +328,9 @@ const handleLogin = async() =>{
     return (
       <View style={styles.dataContainer}>
         <Image 
-          source={require("../assets/imagesvtr/mellow-data-theft.png")}
+          source={require("../assets/imagesvtr/cyborg-book-8.png")}
           resizeMode="contain"
-          style={{height:375, width:375}}
+          style={{height:400, width:400}}
         />
       </View>
     );
@@ -324,8 +364,8 @@ const handleLogin = async() =>{
           {registerButton()}
           {/* {otpText()} */}
           {/* <Text style={{ ...Fonts.white16Regular, marginTop: Sizes.fixPadding, color:'dodgerblue', marginVertical:-20, marginHorizontal:8}}>Social Login</Text> */}
-          {facebookButton()}
-          {googleButton()}
+          {/* {facebookButton()}
+          {googleButton()} */}
           {dataThief()}
         </LinearGradient>
       </ImageBackground>
@@ -397,8 +437,8 @@ const styles = StyleSheet.create({
    dataContainer:{
      height: 100, 
      width: 100,
-     marginHorizontal:-22,
-     marginVertical:-12,
+     marginHorizontal:-18,
+     marginVertical:8,
      elevation:-84
   }
 });

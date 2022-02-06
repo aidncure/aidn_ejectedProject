@@ -32,6 +32,8 @@ import TabBarScreen from './components/TabBarScreen'
 import { database } from "./firebase";
 import stripe from 'tipsi-stripe';
 import OnboardingScreen from './Onboarding';
+import Generate from './screens/Profile/generate';
+import ProfileUpload from './screens/Profile/PicUpload';
 
 // Stripe key activate only when required
 
@@ -80,6 +82,8 @@ const navigator = createAppContainer(
         UserProfile : UsersProfileScreen,
         DefaultProfile : QrScreen,
         Appoint : TabBarScreen,
+        Code : Generate,
+        UploadPic : ProfileUpload,
       }),
     },
     {

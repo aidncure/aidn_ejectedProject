@@ -240,12 +240,11 @@ const LabTestAndHealthCheckUpScreen = ({ navigation }) => {
           onPress={()=> Linking.openURL('whatsapp://send?text=hello&phone=+916364272803')}
           style={{
             flex: 0.5,
-            borderColor: Colors.lightGray,
-            borderWidth: 1.0,
+            borderColor: '#eee',
+            borderWidth: 1,
             alignItems: "center",
             justifyContent: "center",
-            borderRadius: Sizes.fixPadding,
-            elevation: 2.0,
+            borderRadius: 10,
             backgroundColor: "white",
             marginRight: Sizes.fixPadding,
           }}
@@ -260,8 +259,7 @@ const LabTestAndHealthCheckUpScreen = ({ navigation }) => {
             flex: 0.5,
             alignItems: "center",
             justifyContent: "center",
-            borderRadius: Sizes.fixPadding,
-            elevation: 2.0,
+            borderRadius: 10,
             backgroundColor: Colors.primary,
             marginLeft: Sizes.fixPadding,
           }}

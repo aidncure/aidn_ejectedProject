@@ -10,11 +10,12 @@ import {
   StyleSheet,
   TouchableOpacity,
   Linking,
+  TouchableWithoutFeedback
 } from "react-native";
 import { Fonts, Colors, Sizes } from "../../constant/styles";
 import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
-import { ScrollView, TouchableWithoutFeedback } from "react-native-gesture-handler";
+import { ScrollView } from "react-native-gesture-handler";
 import {firebase, auth, db, firestore} from '../../firebase';
 
 const ShowMoreScreen = ({ navigation }) => {
@@ -89,7 +90,7 @@ const ShowMoreScreen = ({ navigation }) => {
 
   function aidnCureBanner() {
     return (
-      <TouchableOpacity onPress={ ()=> Linking.openURL('https://forms.gle/pXqgFRceVe2AuUjG9') }>
+      <TouchableWithoutFeedback onPress={ ()=> Linking.openURL('https://forms.gle/pXqgFRceVe2AuUjG9') }>
        <View style={{ alignItems:'center', justifyContent:'center', backgroundColor:"#fff"}}>
         <Image
         // source={require("../../assets/frequentMigranes.png")}
@@ -106,13 +107,13 @@ const ShowMoreScreen = ({ navigation }) => {
         // borderRadius={30}
       ></Image>
      </View>
-     </TouchableOpacity>
+     </TouchableWithoutFeedback>
     );
   }
   function migranes() {
     return (
       // <TouchableOpacity onPress={() => navigation.navigate("ViewAll")}>
-      <TouchableOpacity onPress={ ()=> Linking.openURL('https://forms.gle/pXqgFRceVe2AuUjG9') }>
+      <TouchableWithoutFeedback onPress={ ()=> Linking.openURL('https://forms.gle/pXqgFRceVe2AuUjG9') }>
        <View style={{ alignItems:'center', justifyContent:'center', backgroundColor:"#fff"}}>
         <Image
         // source={require("../../assets/frequentMigranes.png")}
@@ -127,12 +128,12 @@ const ShowMoreScreen = ({ navigation }) => {
         // borderRadius={30}
       ></Image>
      </View>
-     </TouchableOpacity>
+     </TouchableWithoutFeedback>
     );
   }
     function healthBanner() {
     return (
-      <TouchableOpacity 
+      <TouchableWithoutFeedback 
       onPress={ ()=> Linking.openURL('https://forms.gle/sc6VXstoN3TsddoT7') }>
       <View style={{ alignItems:'center', justifyContent:'center', width:'100%'}}>
       <Image
@@ -149,7 +150,7 @@ const ShowMoreScreen = ({ navigation }) => {
         borderRadius={10}
       ></Image>
       </View>
-      </TouchableOpacity>
+      </TouchableWithoutFeedback>
     );
   }
   //   function healthBanner() {
@@ -220,7 +221,7 @@ const ShowMoreScreen = ({ navigation }) => {
 
   const renderItem = ({ item }) => {
     return (
-      <TouchableHighlight
+      <TouchableWithoutFeedback
         underlayColor="white"
         activeOpacity={0.9}
         style={{ flex: 1 }}
@@ -233,7 +234,7 @@ const ShowMoreScreen = ({ navigation }) => {
             style={{ height: 128, width: "100%", borderRadius:10}}
           />
         </View>
-      </TouchableHighlight>
+      </TouchableWithoutFeedback>
     );
   };
  

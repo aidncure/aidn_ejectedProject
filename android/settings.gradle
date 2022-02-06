@@ -14,6 +14,3 @@ include ':app'
 
 include ':react-native-razorpay'
 project(':react-native-razorpay').projectDir = new File(rootProject.projectDir,   '../node_modules/react-native-razorpay/android')
-
-include ':app', ':react-native-code-push'
-project(':react-native-code-push').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-code-push/android/app')
