@@ -90,7 +90,8 @@ const ShowMoreScreen = ({ navigation }) => {
 
   function aidnCureBanner() {
     return (
-      <TouchableWithoutFeedback onPress={ ()=> Linking.openURL('https://forms.gle/pXqgFRceVe2AuUjG9') }>
+      // <TouchableWithoutFeedback onPress={ ()=> Linking.openURL('https://forms.gle/pXqgFRceVe2AuUjG9') }>
+      <TouchableWithoutFeedback onPress={() => navigation.navigate("Cure")}>
        <View style={{ alignItems:'center', justifyContent:'center', backgroundColor:"#fff"}}>
         <Image
         // source={require("../../assets/frequentMigranes.png")}
@@ -112,8 +113,8 @@ const ShowMoreScreen = ({ navigation }) => {
   }
   function migranes() {
     return (
-      // <TouchableOpacity onPress={() => navigation.navigate("ViewAll")}>
-      <TouchableWithoutFeedback onPress={ ()=> Linking.openURL('https://forms.gle/pXqgFRceVe2AuUjG9') }>
+      // <TouchableWithoutFeedback onPress={ ()=> Linking.openURL('https://forms.gle/pXqgFRceVe2AuUjG9') }>
+      <TouchableWithoutFeedback onPress={() => navigation.navigate("Cure")}>
        <View style={{ alignItems:'center', justifyContent:'center', backgroundColor:"#fff"}}>
         <Image
         // source={require("../../assets/frequentMigranes.png")}
@@ -133,12 +134,13 @@ const ShowMoreScreen = ({ navigation }) => {
   }
     function healthBanner() {
     return (
-      <TouchableWithoutFeedback 
-      onPress={ ()=> Linking.openURL('https://forms.gle/sc6VXstoN3TsddoT7') }>
+      // <TouchableWithoutFeedback 
+      // onPress={ ()=> Linking.openURL('https://forms.gle/sc6VXstoN3TsddoT7') }>
+      <TouchableWithoutFeedback onPress={() => navigation.navigate("Cure")}>
       <View style={{ alignItems:'center', justifyContent:'center', width:'100%'}}>
       <Image
         // source={require("../../assets/specialistImg/healthCoverageAidn.png")}
-        source={require("../../assets/specialistImg/coverage.jpg")}
+        source={require("../../assets/specialistImg/healthbanner101.png")}
         style={{
           height: 400,
           // marginTop:2,
@@ -264,7 +266,7 @@ const ShowMoreScreen = ({ navigation }) => {
       {header()}
       {aidnCureBanner()}
       {specialities()}
-      {migranes()}
+      {/* {migranes()} */}
       {/* {aidnCureBanner()} */}
       {healthBanner()}
      </ScrollView>

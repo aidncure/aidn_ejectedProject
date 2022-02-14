@@ -232,7 +232,7 @@ const QrScreen = ({ navigation }) => {
                         style={{
                     ...Fonts.black15Bold
                     }}
-                    >{user.Codeage} years</Text>
+                    >{user.Codeage}</Text>
                     </View>
                 </View>
                 {/* User ID */}
