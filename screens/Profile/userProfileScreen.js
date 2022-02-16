@@ -80,7 +80,7 @@ const UsersProfileScreen = ({ navigation }) => {
                         {/* Users details code executed */}
                      {/*User Full Name  */}
                     <View style={{
-                    marginVertical:150,
+                    marginVertical:160,
                     marginHorizontal:40,
                     // borderWidth:1,
                     height:25,
@@ -308,7 +308,7 @@ const UsersProfileScreen = ({ navigation }) => {
                 </View>
                 {/* User Occuptaion */}
                 <View style={{
-                    marginVertical:178,
+                    marginVertical:163,
                     marginHorizontal:40,
                     height:25,
                     paddingLeft:6

@@ -145,6 +145,7 @@ const UserDataEdit = ({navigation}) => {
             // value={age}
             // onChangeText={(text) => setAge(text)}
             onChangeText={(value) => handleChangeText('age', value)}
+            keyboardType="phone-pad"
             />
       </View>
       </TouchableWithoutFeedback>
@@ -201,6 +202,7 @@ const UserDataEdit = ({navigation}) => {
             // onChangeText={(text) => setFrom(text)}
             // value={from}
             onChangeText={(value) => handleChangeText('emergency', value)}
+            keyboardType="phone-pad"
             />
       </View>
       </TouchableWithoutFeedback>
@@ -215,6 +217,7 @@ const UserDataEdit = ({navigation}) => {
             placeholderTextColor= {Colors.primary}
             placeholder='Phone number'
             onChangeText={(value) => handleChangeText('phone', value)}
+            keyboardType="phone-pad"
             />
       </View>
       </TouchableWithoutFeedback>
