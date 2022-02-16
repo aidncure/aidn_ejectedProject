@@ -5,3 +5,21 @@ Add doctor
 add documents
 Push notifications
 this.firestore.collection('doctors').doc('doctor'+ docuid.uid).update({
+
+
+Policy Type : Accidental Damage
+Proposer Full Name
+Proposer Email
+Proposer Address 1
+Proposer Phone Number
+Proposer Address 2
+DOB
+Gender
+Relation
+Nominee Title
+Nominee Name
+Nomine Relation
+Nominee DOB
+Insured Person title
+Insured Person full name 
+Insured person DOB

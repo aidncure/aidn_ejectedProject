@@ -64,7 +64,7 @@ const QrScreen = ({ navigation }) => {
 
     useEffect(() => {
       const userData = firebase.auth().currentUser;
-      db.collection('usersProfile').where('uid','==', userData.uid).onSnapshot((querySnapshot)=>{
+      db.collection('UserQR').where('Codeuid','==', userData.uid).onSnapshot((querySnapshot)=>{
         const users = [];
         querySnapshot.docs.forEach((doc)=>{
           const {Codename,Codegender,Codeage,Codeuid} = doc.data();
@@ -329,8 +329,8 @@ return(
         {profileData()}
         </View>
        <TouchableWithoutFeedback
-      //  onPress={()=> navigation.navigate('Code')}
-       onPress={paymentHandler}
+       onPress={()=> navigation.navigate('Code')}
+      //  onPress={paymentHandler}
        >
         <View
         style={{
